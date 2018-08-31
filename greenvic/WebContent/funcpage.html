@@ -1,0 +1,410 @@
+<!DOCTYPE HTML>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<head>
+<title>calculate</title>
+<link href="css/css.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="css/buttons.css" />
+<script type="text/javascript" src="js/delighters.js"></script>
+<script src="js/jquery-1.11.1.min.js" type="text/javascript" ></script>
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<script type="text/javascript" src="js/index_sty.js"></script>
+<script src="js/jquery.min.js"></script> 
+<script src="js/jquery.easing.1.3.js"></script> 
+<script src="js/core_plugin.js"></script> 
+<script src="js/custom_effect.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>calculate</title>
+	</head>
+<style>
+	body{
+	background:url("images/new-background.png");
+	background-repeat:no-repeat;
+	background-size:100% 100%;	
+}
+	}
+</style>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+            window.onload = function() {
+                var arr = ['images/1.2.png'];
+                var obt1 = document.getElementById("pp");
+                var obt2 = document.getElementById("nex");
+                var oImg = document.getElementById("img1");
+ 
+                var index = 0;
+ 
+                function funTab() {
+                    oImg.src = arr[index];
+                    
+                }
+                funTab(); 
+                   
+
+ 
+
+                
+            }
+            </script>
+	<body>
+		<div class="header">
+		<div class="container">
+			<div class="logo">
+				<img src="images/logo.png" alt="" width="80%" height="80%"/>
+			</div>
+			<div class="navigation">
+				<span class="menu"><img src="images/nav.png" alt="" /></span>
+				<ul class="nav">
+					<li><a href="home.html">Home</a></li> 
+					<li><a href="choose.html">Choose a character</a></li>
+					<li><a href="funcpage.html">Footprint</a></li> 
+				</ul>
+			</div>
+			<script>
+					$( "span.menu" ).click(function() {
+					  $( ".navigation ul.nav" ).slideToggle( "slow", function() {
+					    // Animation complete.
+					  });
+					});
+				</script>
+				</div>
+		</div>
+		<div class="piccontainer">
+			<img id="img1" style="width: 100%; height: 100%;">
+		</div>
+		<div class="calcontainer"  id="func">
+
+			<div class="funbx">
+			<p >From:</p>
+	<input type="text" name="address" id="from" value="current location" style="position: relative;
+		width: 60%;" onclick="changevalue()" onmouseout="setvalue()"> 
+
+<div style="height: 30%;">		
+</div>
+<p >To: </p>
+<input  type="text" name="address" id="address" style="width: 60%;">
+<hr />
+<p> Chose your vehicle:</p>
+<select style="width: 60%;" id= "sl">
+  <option value ="volvo">MPV</option>
+  <option value ="saab">Executive</option>
+  <option value="opel">Upper Medium</option>
+</select>
+<br/>
+<br />
+		</div>
+		
+		</div>
+<div id="rus" class="resultbox" style="display: none;">
+	<label id="show" style="margin-left:45% ;font-size: 20px;"></label>
+	<br/>
+	<img src="images/co2 description 2.png" style="margin-left: 32%;">
+	<br/>
+	<input  type="submit" value="Compare" id="submit" style="margin-left: 53%;display: none;">
+</div>
+<br/>
+<br/>
+			<input  type="button" value="footprint" id="fp" style="margin-left: 45%;">
+			
+			<div id="map" class="map" style="display: none;"></div>
+			 <div id="graphic" style="display: none; "></div>		 
+			 
+   <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var emission;
+      var busemission;
+      var map, infoWindow;
+      var geocoder;
+      var start;
+      var end;
+      var oImg = document.getElementById("img1");
+      var selectv = document.getElementById("sl").value;
+      
+      function initMap() {
+      	var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 10
+        });
+         var geocoder = new google.maps.Geocoder();
+
+       
+
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            start = pos;
+			var marker = new google.maps.Marker({
+          	position: pos,
+          	map: map,
+          	title: 'Hello World!'
+        }); 
+        		infoWindow.open(map);
+            map.setCenter(pos);
+           	directionsDisplay.setMap(map);
+           	document.getElementById('fp').addEventListener('click',function(){
+           calculatefootprint(directionsService, directionsDisplay);
+           	});
+           	document.getElementById('submit').addEventListener('click', function() {
+        	  calculateAndDisplayRoute(directionsService, directionsDisplay);
+        });
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+        
+      }
+      
+      
+       function calculatefootprint(directionsService, directionsDisplay) {
+       	var orgin = "";
+       	if (document.getElementById("from").value == "current location"){
+       		var orgin = start;
+       	}else{
+       		orgin = document.getElementById("from").value;
+       		
+       	}
+        directionsService.route({
+          origin: orgin,
+          destination: document.getElementById('address').value,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var result = directionsDisplay.getDirections();
+            var total1 = 0;
+        		var myroute = result.routes[0];
+        		for (var i = 0; i < myroute.legs.length; i++) {
+         	 total1 += myroute.legs[i].distance.value;
+        		}
+       		    total1 = total1 / 1000;
+       		    busemission = total1 * 50.9714;
+       		    if(total1 > 5){
+       		    	oImg.src = "images/1.3.png"
+       		    	
+       		    }else{
+       		    	oImg.src = "images/1.4.png"
+
+       		    }
+       		    if (selectv == "MPV"){
+       		    		emission = 132 * total1;
+       		    }else if (selectv == "Executive"){
+       		    		emission = 121.6 * total1;
+       		    }else{
+       		    	emission = 120.5 * total1;
+       		    }
+       		document.getElementById("show").innerHTML = "your carbon emission: " + emission + " grams";
+            document.getElementById("fp").style.display = "none";
+            document.getElementById("func").style.display = "none";
+            document.getElementById("rus").style.display = "inline";
+            document.getElementById("submit").style.display = "inline";
+          } else {
+            window.alert('can not find the address you entered ');
+          }
+        });
+ 
+       }
+       
+       function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+       	var orgin = "";
+       	if (document.getElementById("from").value == "current location"){
+       		var orgin = start;
+       	}else{
+       		orgin = document.getElementById("from").value;
+       		
+       	}
+        directionsService.route({
+          origin: orgin,
+          destination: document.getElementById('address').value,
+          travelMode: 'DRIVING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay.setDirections(response);
+            var result = directionsDisplay.getDirections();
+            var total1 = 0;
+        		var myroute = result.routes[0];
+        		for (var i = 0; i < myroute.legs.length; i++) {
+         	 total1 += myroute.legs[i].distance.value;
+        		}
+       		    total1 = total1 / 1000;
+       		    busemission = total1 * 50.9714;
+       		    if(total1 > 5){
+       		    	oImg.src = "images/1.3.png"
+       		    	
+       		    }else{
+       		    	oImg.src = "images/1.4.png"
+
+       		    }
+       		    if (selectv == "MPV"){
+       		    		emission = 132 * total1;
+       		    }else if (selectv == "Executive"){
+       		    		emission = 121.6 * total1;
+       		    }else{
+       		    	emission = 120.5 * total1;
+       		    }
+            console.log(emission)
+            document.getElementById('submit').style.display = "none";
+            document.getElementById("func").style.display = "none";
+            document.getElementById("graphic").style.display = "inline"
+            document.getElementById("rus").style.display = "none";
+             var data = [{
+                "name": "car",
+                "value": emission,
+                "ixx": "./images/3.png"
+        ,},
+            {
+                "name": "bus",
+                "value": busemission,
+                "ixx": "./images/4.png"
+        ,},
+            {
+                "name": "bicycle",
+                "value": 0,
+                "ixx": "./images/2.png"
+        ,},
+            {
+                "name": "walking",
+                "value": 0,
+                "ixx": "./images/1.png"
+        ,}];
+
+        //sort bars based on value
+        data = data.sort(function (a, b) {
+            return d3.ascending(a.value, b.value);
+        })
+
+        //set up svg using margin conventions - we'll need plenty of room on the left for labels
+        var margin = {
+            top: 15,
+            right: 125,
+            bottom: 15,
+            left: 60
+        };
+
+        var width = 960 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+        var svg = d3.select("#graphic").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var x = d3.scale.linear()
+            .range([0, width])
+            .domain([0, d3.max(data, function (d) {
+                return d.value;
+            })]);
+
+        var y = d3.scale.ordinal()
+            .rangeRoundBands([height, 0], .1)
+            .domain(data.map(function (d) {
+                return d.name;
+            }));
+
+        //make y axis to show bar names
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            //no tick marks
+            .tickSize(0)
+            .orient("left");
+
+        var gy = svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis)
+
+        var bars = svg.selectAll(".bar")
+            .data(data)
+            .enter()
+            .append("g")
+
+        //append rects
+        bars.append("rect")
+            .attr("class", "bar")
+            .attr("y", function (d) {
+                return y(d.name);
+            })
+            .attr("height", y.rangeBand())
+            .attr("x", 0)
+            .attr("width", function (d) {
+                return x(d.value);
+            });
+
+        //add a value label to the right of each bar
+        bars.append("text")
+            .attr("class", "label")
+            //y position of the label is halfway down the bar
+            .attr("y", function (d) {
+                return y(d.name) + y.rangeBand() / 2 + 4;
+            })
+            //x position is 3 pixels to the right of the bar
+            .attr("x", function (d) {
+                return x(d.value) + 10;
+            })
+          
+        
+
+  		  bars.append("svg:image")
+    			.attr("class", "svg-image")
+    			.attr("y", function (d) {
+                return y(d.name) + y.rangeBand() / 2 -28;
+            })
+            //x position is 3 pixels to the right of the bar
+            .attr("x", function (d) {
+                return x(d.value) + 38;
+            })
+    			.attr("height", "100px")
+    			.attr("width", "100px")
+      		.attr("xlink:href",function (d) {
+                return d.ixx;
+            })
+          } else {
+            window.alert('can not find the address you entered ');
+          }
+        });
+ 
+       }
+       
+       
+       function changevalue(){
+       document.getElementById("from").value = "";
+       }
+      
+       function setvalue(){
+       	if (document.getElementById("from").value == ""){
+       document.getElementById("from").value = "current location";
+       }
+       }
+       
+        
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBVLIu5YPn5cZXXGKqmyirL1-08uyh_WM&callback=initMap">
+    </script>
+	</body>
+
+</html>

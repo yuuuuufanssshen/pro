@@ -41,12 +41,12 @@
 	cursor:pointer;
 }
 #solid #btt{
-	width:905px;
+	width:100%;
 	height:55px;
 	top:85%;
 	left:50%;
 	position:relative;
-	margin-left:-452px;
+	margin-left:-50%;
 }
 #solid #btt span{
 	position:absolute;

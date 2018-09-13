@@ -46,7 +46,7 @@ background-color: #FFFFFF;
 header.header2{
 	width: 100%;
 	height: 97%;
-	background-image: url(../img/Transportation-Header.jpg);
+	background-image: url(../img/bikebg1.jpg);
 	background-size: cover;
 	 background-repeat: no-repeat;
 }
@@ -57,4 +57,10 @@ header.header3{
 	background-size: cover;
 	background-position: 100%,100%;
 	 background-repeat: no-repeat;
+}
+.calfuc{
+	width: 100%;
+	height: 100%;
+	margin-top: 15%;
+	background-color: background-color: rgba(176,224,230,0.5);;
 }

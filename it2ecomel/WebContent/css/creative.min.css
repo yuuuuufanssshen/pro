@@ -64,3 +64,26 @@ header.header3{
 	margin-top: 15%;
 	background-color: background-color: rgba(176,224,230,0.5);;
 }
+.bar{
+	fill:#5f89ad;
+}
+.axis{
+	font-size: 13px;
+	
+}
+
+   .bar {
+          
+            fill: #5f89ad;
+        }
+        
+        .axis {
+            font-size: 13px;
+        }
+        
+        .axis path,
+        .axis line {
+            fill: none;
+            display: none;
+        }
+        

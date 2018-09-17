@@ -29,16 +29,16 @@
   <body id="page-top">
 
     <!-- Navigation -->
-   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Eco Melbourne</a>
+        <a class="navbar-brand js-scroll-trigger" href="index.html">Eco Melbourne</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#page-top">Home</a>
+              <a class="nav-link js-scroll-trigger" href="index.html">Home</a>
             </li>
             <li class="nav-item">
             	 <a class="nav-link js-scroll-trigger" href="data.html">Statistics</a>
@@ -52,7 +52,7 @@
               <a class="nav-link js-scroll-trigger" href="bikeintro.html">Find-bike</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="">About Us</a>
+              <a class="nav-link js-scroll-trigger" href="about.html">About Us</a>
             </li>
           </ul>
         </div>
@@ -70,19 +70,25 @@
   		 <div class="row"style="width: 100%;height: 100%;">
     <div class="col" style="width: 100%;height: 100%;	background-color: rgba(176,224,230,0.5);">
     	<h1 style="text-align: center;margin-top: 3%;color: #000000;background-color: rgba(176,224,230,0.7);">Melbourne</h1>
-    	<p id="output" style="text-align: center;"></p>
+    	<h4 id="output" style="text-align: center;"></h4>
+    	       <h4 id="tianqi"style="text-align: center;"></h4>
+
     	<div class="row">
     <div class="col-sm">
-      <h3>3h</h3>
+      <h3 id="h1"></h3>
       <p id="3h"></p>
+       <p id="tianqi1"></p>
     </div>
     <div class="col-sm">
-      <h3>6h</h3>
+      <h3 id="h2"></h3>
       <p id="6h"></p>
+             <p id="tianqi2"></p>
     </div>
     <div class="col-sm">
-      <h3>9h</h3>
+      <h3 id="h3"></h3>
 	  <p id="9h"></p>
+	         <p id="tianqi3"></p>
+
     </div>
   </div>
     <p style="text-align: center;margin-top: 3%;color: #000000;background-color: rgba(176,224,230,0.7);bottom: 0;font-size: 15px;">weather from OpenWeather</h1>
@@ -178,6 +184,7 @@
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 12
+          
         });
         var geocoder = new google.maps.Geocoder();
 		
@@ -276,28 +283,48 @@
     	var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&APPID=636d4d479e4d9c3e18c25b2d52cfeaf5&units=metric";
 
 $.getJSON(queryURL, function (data) {
+var timer = 24; 
+var d1 = new Date(); 
+var d2 = new Date();
+d1.setHours(+d2.getHours()+(timer/8) ); 
+var hour = d1.getHours();
+$('#h1').append(hour + " : " + "00");
+d1.setHours(+d2.getHours()+(timer/4) ); 
+var hour2 = d1.getHours();
+$('#h2').append(hour2 + " : " + "00");
+d1.setHours(+d2.getHours()+(timer*3/8) ); 
+var hour2 = d1.getHours();
+$('#h3').append(hour2 + " : " + "00");
 
-  var results = data.list[0]
+  var results = data.list[0];
+  var desc =  results.weather[0].description;
 
 
-  var curdesc = results.main.temp
-  var result1 = data.list[5]
+  var curdesc = results.main.temp;
+  var result1 = data.list[5];
+  var desc1 =  result1.weather[0].description;
 
 
-  var curdesc1 = result1.main.temp
-  var result2 = data.list[6]
 
-
-  var curdesc2 = result2.main.temp
-  var result3= data.list[7]
-
-
-  var curdesc3 = result3.main.temp
+  var curdesc1 = result1.main.temp;
+  var result2 = data.list[6];
+  var desc2 =  result2.weather[0].description;
+  var curdesc2 = result2.main.temp;
   
-  $('#output').append("Temperature: " + curdesc + " ℃");
+  var result3= data.list[7];
+  var curdesc3 = result3.main.temp;
+  var desc3 =  result3.weather[0].description;
+
+  
+  $('#tianqi').append("Now: " + curdesc + " ℃");
   $('#3h').append( curdesc1 + " ℃");
   $('#6h').append( curdesc2 + " ℃");
   $('#9h').append( curdesc3 + " ℃");
+  
+    $('#tianqi').append(", " + desc);
+  $('#tianqi1').append(desc1);
+  $('#tianqi2').append( desc2);
+  $('#tianqi3').append( desc3);
 
 })
 

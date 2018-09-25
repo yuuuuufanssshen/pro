@@ -22,7 +22,10 @@
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="css/index.css" rel="stylesheet">
     <link href="css/creative.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   </head>
 
@@ -60,29 +63,32 @@
     </nav>
 
     <header class="masthead text-center text-white d-flex">
+        <div class="layer"> 
       <div class="container my-auto" >
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h1 class="text-uppercase">
-              <strong>Carbon Footprints: Bigger is not better!</strong>
-            </h1>
+            <h1 class="text">  Carbon Footprint: <br />Bigger is not Better!</h1>
             <hr>
           </div>
           <div class="col-lg-8 mx-auto">
-            <p class="text-faded mb-5" style="color: #FFFFFF;">Did you know you leave a foot print each time you drive?</br>Explore the website to learn about your carbon footprint and its impact.</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+            <p class="text-faded mb-5" style="color: #FFFFFF;">Did you know you leave a footprint each time you travel?</br>Explore the website to learn about carbon footprint, its impact,  your contribution and our solution.</p>
+            <a class="btn btn-primary btn-xl js-scroll-trigg er" href="#about">Learn More</a>
           </div>
         </div>
       </div>
+    </div>
     </header>
 
+    
     <section class="bg-primary" id="about"style= "height:93%; width: 100%;">
         <div class="container" >
 <div class="row">
     <div class="col-sm-6">
+            <div class="item" data-aos="zoom-out">
     	<div class="imgcontainer">
     		<img src="img/industry-611668_1920.jpg">
-    		</div>
+            </div>
+        </div>
     </div>
     <div class="col-sm-6" ><h1 style="margin-top:3%;color: #28A745;">What is Carbon Footprint?</h1>
                     <p style="color: #000000;">The amount of greenhouse gases - primarily carbon dioxide - released into the atmosphere by human activity, for example,
@@ -96,9 +102,11 @@ carbon dioxide emitted when riding a vehicle, using an electrical appliance, wha
                     <p style="color: #000000;">Carbon footprint contributes to 35% increase in global warming, which may result in glaciers melting and rising temperatures. Thus, many animals lose their habitats and are in peril of extinction</p>
   </div>
    <div class="col-sm-6">
+        <div class="item" data-aos="zoom-out">
     	<div class="imgcontainer">
     		<img src="img/globalemissionspromo.gif">
-    		</div>
+            </div>
+            <div class="item" data-aos="zoom-out">
     </div>
   </div>
         </div>
@@ -149,7 +157,7 @@ carbon dioxide emitted when riding a vehicle, using an electrical appliance, wha
                                     The World
                                 </div>
                                 <div class="project-name">
-                                    The ultimate affect will be on the whole world with rising sea levels, pollution and droughts.
+                                    The ultimate effect will be on the whole world with rising sea levels, pollution and droughts.
                                 </div>
                             </div>
                         </div>
@@ -202,6 +210,13 @@ carbon dioxide emitted when riding a vehicle, using an electrical appliance, wha
 <div class="newfooter">
 	<p style="margin-left: 45%;">© 2018 Eco Melbourne</p>
 </div>
+
+<script>
+    AOS.init({
+        duration: 1200,
+      })
+      </script>
+
   </body>
 
 </html>

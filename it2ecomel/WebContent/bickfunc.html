@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+   <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Eco-Melbourne</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
+    <link href="css/bikefunc.css" rel="stylesheet">
+
+
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet">
+
+  </head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #origin-input,
+      #destination-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 18px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 80%;        
+        border: 1.4px solid orange
+      }
+
+      #origin-input:focus,
+      #destination-input:focus {
+        border-color: #4d90fe;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+      }
+
+      #mode-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        margin-left: 12px;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #mode-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+
+    </style>
+  <body>
+   <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Eco Melbourne</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="calculator.html">Footprint Calculator</a>
+
+            </li>
+            
+            <li class="nav-item">
+              
+              <a class="nav-link js-scroll-trigger" href="bikeintro.html">Eco-Journey Planner</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="data.html">Statistics</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="about.html">About Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+     <header class="header3">
+      <div class="container my-auto">    
+      </div>
+    </header>
+    <div class="container" style="height: fit-content;">
+    <div class="row" id="row">
+       
+  <div class="col-4" id="weather" >
+  	<h3 style="text-align: center;">Today's Weather</h3>
+  	<p style="text-align: center;margin-bottom: 0;"><label id="tianqi"></label></p>
+  	   <div class="row" id="row">
+    <div class="col-sm">
+      <h3 id="h1" style="font-family: Roboto;"></h3>
+      <p id="3h" style="font-family: Roboto;"></p>
+       <p id="tianqi1" style="font-family: Roboto;"></p>
+    </div>
+    <div class="col-sm">
+      <h3 id="h2" style="font-family: Roboto;"></h3>
+      <p id="6h" style="font-family: Roboto;"></p>
+             <p id="tianqi2" style="font-family: Roboto;"></p>
+    </div>
+    <!--<div class="col-sm">
+      <h3 id="h3" style="font-family: Roboto;"></h3>
+	  <p id="9h" style="font-family: Roboto;"></p>
+	         <p id="tianqi3" style="font-family: Roboto;"></p>
+    </div> -->
+    
+  </div>
+      <p style="text-align: center;margin-top: 3%;bottom: 0;font-size: 15px;font-family: Roboto;">Source:  OpenWeather</p>
+
+  
+  </div>
+  <div class="col-8" id="func"><input id="origin-input" class="controls" style="display: none;" type="text"
+        placeholder="Enter an origin location">
+
+        <h2>Travel the Eco-friendly Way!</h2><hr>
+
+    <input id="destination-input" class="controls" type="text"
+        placeholder="Enter a destination location">
+<br />
+<br />
+    <div id="mode-selector" class="controls" style="display: none;">
+      <input type="radio" name="type" id="changemode-walking" checked="checked">
+      <label for="changemode-walking">Walking</label>
+
+      <input type="radio" name="type" id="changemode-transit">
+      <label for="changemode-transit">Transit</label>
+
+      <input type="radio" name="type" id="changemode-driving">
+      <label for="changemode-driving">Driving</label>
+    </div>
+    <div id="checkcontrol" style="display: none;    margin: 5% 10% 0% 10%;">
+      <div class="col-sm">
+      <div class="check1">
+<input type="checkbox"  id="markerbike" value="bike" checked="checked" onclick="showBike()"/><label for="markerbike"><h4>Bike Sharing Station</h4></label>
+</div>
+  </br>
+  <div class="check2">
+      <input type="checkbox" id="markertoilet" value="toilets" checked="checked" onclick="showToilet()" /><label for="markertoilet"><h4>Public Toilets</h4></label>
+	</div>
+  </br>
+</div>
+<div class="col-sm">
+  <div class="check3">
+      <input type="checkbox" id="markerwater" value="water" checked="checked" onclick="showDrink()"/><label for="markerwater"><h4>Water Fountains</h4></label>
+	</div>
+  </br>
+  <div class="check4">
+      <input type="checkbox" id="markerparking" value="parking"checked="checked" onclick="showPark()" /><label for="markerparking"><h4>Bike Parking</h4></label>
+	</div></br></div></div></div>
+</div>
+  </div>
+    
+<div class="row"style="height: 60%;">
+	<div class="col"style="height: 100%;">
+    <div id="map"></div>
+    </div>
+    </div>
+<div class="row" style="margin-right: 10%;margin-left: 10%;">
+  <div class="col">
+  	<h4>Bike Sharing Station</h4><hr>
+  	<p><label id="address1"></label></p>
+  	<p>Distance: <label id="distance1"></label>
+  	</p>
+  </div>
+  <div class="col">
+      <h4>Water Fountain</h4><hr>
+      <p><label id="address4"></label></p>
+      <p>Distance: <label id="distance4"></label></p>
+  	
+  </div>
+
+
+
+  <div class="col">
+  	<h4>Public Toilet</h4><hr>
+  	<p><label id="address3"></label></p>
+  	<p>Distance: <label id="distance3"></label></p>
+  </div>
+  <div class="col">
+      <h4>Bike Parking</h4><hr>
+      <p><label id="address2"></label></p>
+      <p>Distance: <label id="distance2"></label></p>
+  
+  </div>
+</div>
+</div>
+
+    <script>
+    		
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+      var parking = [{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 62m North of 42 Miles Street, Southbank, 3006","Latitude":-37.82778506,"Longitude":144.9661772},{"LOCATION_DESC":"Coventry Street between Dodds Street and Sturt Street approximately 67m SW of 131 Dodds Street, Southbank, 3006","Latitude":-37.8299695,"Longitude":144.9663177},{"LOCATION_DESC":"Coventry Street between Dodds Street and Sturt Street approximately 65m SW of 131 Dodds Street, Southbank, 3006","Latitude":-37.82996478,"Longitude":144.9663315},{"LOCATION_DESC":"Coventry Street between Dodds Street and Sturt Street approximately 64m SW of 131 Dodds Street, Southbank, 3006","Latitude":-37.82996152,"Longitude":144.9663458},{"LOCATION_DESC":"Kings Domain South approximately 40m South of The Gardens Shop, Gardens Shop, 100 Birdwood Avenue, Melbourne, 3004","Latitude":-37.83037304,"Longitude":144.9746605},{"LOCATION_DESC":"Wells Street between Grant Street and Miles Street approximately 28m NE of CitiPower Pty Ltd, Substation, 4 Miles Street, Southbank, 3006","Latitude":-37.828223,"Longitude":144.9684145},{"LOCATION_DESC":"Wells Street between Grant Street and Miles Street approximately 29m NE of CitiPower Pty Ltd, Substation, 4 Miles Street, Southbank, 3006","Latitude":-37.82821497,"Longitude":144.9684195},{"LOCATION_DESC":"Wells Street between Grant Street and Miles Street approximately 30m NE of CitiPower Pty Ltd, Substation, 4 Miles Street, Southbank, 3006","Latitude":-37.82820391,"Longitude":144.9684204},{"LOCATION_DESC":"Sturt Street between Miles Street and Coventry Street approximately 29m South of Downstairs Bistro & Lounge, 215-217 Sturt Street, Southbank, 3006","Latitude":-37.82969798,"Longitude":144.9656243},{"LOCATION_DESC":"Sturt Street between Miles Street and Coventry Street approximately 30m South of Downstairs Bistro & Lounge, 215-217 Sturt Street, Southbank, 3006","Latitude":-37.829709,"Longitude":144.9656203},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 62m North of 42 Miles Street, Southbank, 3006","Latitude":-37.82777695,"Longitude":144.9661774},{"LOCATION_DESC":"St Kilda Road between Bromby Street and Toorak Road approximately 7m West of McDonalds, 407A St Kilda Road, Melbourne, 3004","Latitude":-37.83618546,"Longitude":144.9759826},{"LOCATION_DESC":"St Kilda Road between Bromby Street and Toorak Road approximately 8m West of McDonalds, 407A St Kilda Road, Melbourne, 3004","Latitude":-37.83617556,"Longitude":144.9759778},{"LOCATION_DESC":"St Kilda Road between Bromby Street and Toorak Road approximately 8m NW of McDonalds, 407A St Kilda Road, Melbourne, 3004","Latitude":-37.83616358,"Longitude":144.9759731},{"LOCATION_DESC":"Domain Road between St Kilda Road and Dallas Brooks Drive approximately 78m East of Melbourne Grammar School, Wadhurst Campus, Melbourne Grammar School, 1 Domain Road, Melbourne, 3004","Latitude":-37.83310497,"Longitude":144.9739445},{"LOCATION_DESC":"Domain Road between St Kilda Road and Dallas Brooks Drive approximately 73m East of Melbourne Grammar School, Wadhurst Campus, Melbourne Grammar School, 1 Domain Road, Melbourne, 3004","Latitude":-37.83309901,"Longitude":144.9738914},{"LOCATION_DESC":"Dodds Street between Miles Street and Grant Street approximately 39m South of Cystic Fibrosis Victoria Community Care Pty Ltd, Suite 1, Ground, 80 Dodds Street, Southbank, 3006","Latitude":-37.82779261,"Longitude":144.967324},{"LOCATION_DESC":"Dodds Street between Miles Street and Grant Street approximately 37m South of Cystic Fibrosis Victoria Community Care Pty Ltd, Suite 1, Ground, 80 Dodds Street, Southbank, 3006","Latitude":-37.82777655,"Longitude":144.9673228},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 76m North of 42 Miles Street, Southbank, 3006","Latitude":-37.82764532,"Longitude":144.9662209},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 75m North of 42 Miles Street, Southbank, 3006","Latitude":-37.82765239,"Longitude":144.9662178},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 74m North of 42 Miles Street, Southbank, 3006","Latitude":-37.82765866,"Longitude":144.9662156},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 74m North of 42 Miles Street, Southbank, 3006","Latitude":-37.82766403,"Longitude":144.9662136},{"LOCATION_DESC":"Miles Street between Sturt Street and Moore Street approximately 35m West of Victorian College Of The Arts Secondary School, 57 Miles Street, Southbank, 3006","Latitude":-37.82818469,"Longitude":144.9648084},{"LOCATION_DESC":"Miles Street between Sturt Street and Moore Street approximately 36m West of Victorian College Of The Arts Secondary School, 57 Miles Street, Southbank, 3006","Latitude":-37.82818193,"Longitude":144.9647899},{"LOCATION_DESC":"Miles Street between Sturt Street and Moore Street approximately 38m West of Victorian College Of The Arts Secondary School, 57 Miles Street, Southbank, 3006","Latitude":-37.82817709,"Longitude":144.96477},{"LOCATION_DESC":"Moore Street between Miles Street and Kings Way approximately 47m West of Victorian College Of The Arts Secondary School, 57 Miles Street, Southbank, 3006","Latitude":-37.82820634,"Longitude":144.9646584},{"LOCATION_DESC":"Moore Street between Miles Street and Kings Way approximately 47m West of Victorian College Of The Arts Secondary School, 57 Miles Street, Southbank, 3006","Latitude":-37.828227,"Longitude":144.9646548},{"LOCATION_DESC":"Moore Street between Miles Street and Kings Way approximately 47m West of Victorian College Of The Arts Secondary School, 57 Miles Street, Southbank, 3006","Latitude":-37.82823728,"Longitude":144.9646501},{"LOCATION_DESC":"Toorak Road between Millswyn Street and Park Street approximately 5m West of 68W Toorak Road, South Yarra, 3141","Latitude":-37.83744745,"Longitude":144.9802105},{"LOCATION_DESC":"Toorak Road between Millswyn Street and Park Street approximately 4m SW of 68W Toorak Road, South Yarra, 3141","Latitude":-37.83745037,"Longitude":144.9802285},{"LOCATION_DESC":"Coventry Street between Dodds Street and Sturt Street approximately 68m West of Hamilton & Marino Builders Pty Ltd, Ground, 85 Coventry Street, Southbank, 3006","Latitude":-37.83016139,"Longitude":144.9663974},{"LOCATION_DESC":"Coventry Street between Dodds Street and Sturt Street approximately 86m West of Hamilton & Marino Builders Pty Ltd, Ground, 85 Coventry Street, Southbank, 3006","Latitude":-37.83021531,"Longitude":144.9662009},{"LOCATION_DESC":"Dorcas Street between Dodds Street and Kings Way approximately 64m SW of Human Beans, 147 Dodds Street, Southbank, 3006","Latitude":-37.83110325,"Longitude":144.9668125},{"LOCATION_DESC":"Dorcas Street between Dodds Street and Kings Way approximately 65m SW of Human Beans, 147 Dodds Street, Southbank, 3006","Latitude":-37.83110635,"Longitude":144.9667985},{"LOCATION_DESC":"Dorcas Street between Dodds Street and Kings Way approximately 66m SW of Human Beans, 147 Dodds Street, Southbank, 3006","Latitude":-37.8311087,"Longitude":144.9667889},{"LOCATION_DESC":"Dodds Street between Miles Street and Coventry Street approximately 17m West of 123 Dodds Street, Southbank, 3006","Latitude":-37.82931738,"Longitude":144.9668587},{"LOCATION_DESC":"Dodds Street between Miles Street and Coventry Street approximately 17m West of 119 Dodds Street, Southbank, 3006","Latitude":-37.82919707,"Longitude":144.966895},{"LOCATION_DESC":"Dodds Street between Miles Street and Coventry Street approximately 17m West of 119 Dodds Street, Southbank, 3006","Latitude":-37.82918281,"Longitude":144.9668986},{"LOCATION_DESC":"Wells Street between Coventry Street and Dorcas Street approximately 4m West of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.82998008,"Longitude":144.9692745},{"LOCATION_DESC":"Wells Street between Coventry Street and Dorcas Street approximately 4m SW of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.82999371,"Longitude":144.969281},{"LOCATION_DESC":"Wells Street between Coventry Street and Dorcas Street approximately 4m SW of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83000466,"Longitude":144.9692892},{"LOCATION_DESC":"Wells Street between Coventry Street and Dorcas Street approximately 5m SW of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83001691,"Longitude":144.969294},{"LOCATION_DESC":"Wells Street between Coventry Street and Dorcas Street approximately 6m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83002913,"Longitude":144.9692971},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 95m West of CitiPower Pty Ltd, Substation, 78 Dodds Street, Southbank, 3006","Latitude":-37.82714003,"Longitude":144.9663723},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 95m West of CitiPower Pty Ltd, Substation, 78 Dodds Street, Southbank, 3006","Latitude":-37.82715093,"Longitude":144.9663667},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 95m West of CitiPower Pty Ltd, Substation, 78 Dodds Street, Southbank, 3006","Latitude":-37.82716358,"Longitude":144.9663631},{"LOCATION_DESC":"Sturt Street between Grant Street and Miles Street approximately 95m West of CitiPower Pty Ltd, Substation, 78 Dodds Street, Southbank, 3006","Latitude":-37.82717374,"Longitude":144.9663617},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 53m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83042804,"Longitude":144.969112},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 52m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83042135,"Longitude":144.9691263},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 38m East of Fox Sports, 50 Dorcas Street, Southbank, 3006","Latitude":-37.83048074,"Longitude":144.968933},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 37m East of Fox Sports, 50 Dorcas Street, Southbank, 3006","Latitude":-37.83048626,"Longitude":144.9689295},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 32m SW of Fox Sports, 50 Dorcas Street, Southbank, 3006","Latitude":-37.83069449,"Longitude":144.968191},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 34m SW of Fox Sports, 50 Dorcas Street, Southbank, 3006","Latitude":-37.83070124,"Longitude":144.9681749},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 35m SW of Fox Sports, 50 Dorcas Street, Southbank, 3006","Latitude":-37.83070505,"Longitude":144.9681555},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 53m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83041905,"Longitude":144.9691026},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 51m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83040894,"Longitude":144.9691227},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 50m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83040409,"Longitude":144.9691393},{"LOCATION_DESC":"Dorcas Street between Wells Street and Dodds Street approximately 51m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.83041638,"Longitude":144.9691466},{"LOCATION_DESC":"Dorcas Street between St Kilda Road and Wells Street approximately 17m East of Nashi, 6 Dorcas Street, Southbank, 3006","Latitude":-37.83001738,"Longitude":144.9705181},{"LOCATION_DESC":"Dorcas Street between St Kilda Road and Wells Street approximately 18m East of Nashi, 6 Dorcas Street, Southbank, 3006","Latitude":-37.83001928,"Longitude":144.970529},{"LOCATION_DESC":"Dorcas Street between St Kilda Road and Wells Street approximately 19m East of Nashi, 6 Dorcas Street, Southbank, 3006","Latitude":-37.8300109,"Longitude":144.9705445},{"LOCATION_DESC":"Dorcas Street between St Kilda Road and Wells Street approximately 21m East of Nashi, 6 Dorcas Street, Southbank, 3006","Latitude":-37.83000851,"Longitude":144.9705578},{"LOCATION_DESC":"City Road between Westgate Freeway and Clarendon Street approximately 16m NE of City Road Management Pty Ltd, 344 City Road, Southbank, 3006","Latitude":-37.82797674,"Longitude":144.9575356},{"LOCATION_DESC":"City Road between Westgate Freeway and Clarendon Street approximately 18m NE of City Road Management Pty Ltd, 344 City Road, Southbank, 3006","Latitude":-37.82796645,"Longitude":144.9575557},{"LOCATION_DESC":"St Kilda Road between Bromby Street and Toorak Road approximately 27m NW of B Convenience, Ground, 403 St Kilda Road, Melbourne, 3004","Latitude":-37.83570402,"Longitude":144.9755982},{"LOCATION_DESC":"St Kilda Road between Bromby Street and Toorak Road approximately 28m NW of B Convenience, Ground, 403 St Kilda Road, Melbourne, 3004","Latitude":-37.8356968,"Longitude":144.9755924},{"LOCATION_DESC":"St Kilda Road between Bromby Street and Toorak Road approximately 7m West of McDonalds, 407A St Kilda Road, Melbourne, 3004","Latitude":-37.83618903,"Longitude":144.9759858},{"LOCATION_DESC":"Wells Street between Coventry Street and Dorcas Street approximately 7m South of South Melbourne Food Works, 135 Wells Street, Southbank, 3006","Latitude":-37.8300356,"Longitude":144.9693015},{"LOCATION_DESC":"City Road between Westgate Freeway and Clarendon Street approximately 20m NE of City Road Management Pty Ltd, 344 City Road, Southbank, 3006","Latitude":-37.82794994,"Longitude":144.9575648},{"LOCATION_DESC":"City Road between Westgate Freeway and Clarendon Street approximately 14m NE of City Road Management Pty Ltd, 344 City Road, Southbank, 3006","Latitude":-37.82798428,"Longitude":144.9575184},{"LOCATION_DESC":"City Road between Westgate Freeway and Clarendon Street approximately 12m NE of City Road Management Pty Ltd, 344 City Road, Southbank, 3006","Latitude":-37.82800302,"Longitude":144.9575077},{"LOCATION_DESC":"City Road between Westgate Freeway and Clarendon Street approximately 22m NE of City Road Management Pty Ltd, 344 City Road, Southbank, 3006","Latitude":-37.82793766,"Longitude":144.9575845},{"LOCATION_DESC":"Airlie Street between Clowes Street and The Righi approximately 2m East of 53 Airlie Street, South Yarra, 3141","Latitude":-37.83139115,"Longitude":144.9870277},{"LOCATION_DESC":"St Kilda Road between Toorak Road and Slater Street approximately 49m North of Global Retail Brands Australia Pty Ltd, Ground & Pt Lvl 3, 425 St Kilda Road, Melbourne, 3004","Latitude":-37.83791618,"Longitude":144.9764762},{"LOCATION_DESC":"St Kilda Road between Toorak Road and Slater Street approximately 58m North of Global Retail Brands Australia Pty Ltd, Ground & Pt Lvl 3, 425 St Kilda Road, Melbourne, 3004","Latitude":-37.8378393,"Longitude":144.9764491}];
+	  var drinking = [{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Gardiner Reserve","Latitude":-37.79899462,"Longitude":144.9433861},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81522141,"Longitude":144.9617263},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Birrarung Marr","Latitude":-37.81890779,"Longitude":144.9730194},{"Description":"Drinking Fountain - Drinking Fountain - Type 2 - Enterprize Park","Latitude":-37.8199983,"Longitude":144.9597974},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81027785,"Longitude":144.9610923},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Flagstaff Gardens","Latitude":-37.81043107,"Longitude":144.955584},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82468832,"Longitude":144.9469531},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82039537,"Longitude":144.9414854},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81956009,"Longitude":144.9606004},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81734782,"Longitude":144.9877967},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.79961587,"Longitude":144.9642505},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.78972453,"Longitude":144.9554269},{"Description":"Drinking Fountain - Drinking Fountain - Monument Style Type 5","Latitude":-37.78528313,"Longitude":144.9661888},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Queen Victoria Gardens","Latitude":-37.82249308,"Longitude":144.971144},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Kings Domain South","Latitude":-37.83343391,"Longitude":144.9815152},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Princes Park","Latitude":-37.78468826,"Longitude":144.9603937},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.82122088,"Longitude":144.9441853},{"Description":"Drinking fountain - unspecified type - Fawkner Park","Latitude":-37.84105383,"Longitude":144.9847416},{"Description":"Drinking Fountain - Drinking Fountain - Lygon St Type","Latitude":-37.79775185,"Longitude":144.9674474},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Alexandra Gardens","Latitude":-37.82087797,"Longitude":144.972932},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81812626,"Longitude":144.945843},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.80037327,"Longitude":144.9727894},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Reeves Street Park","Latitude":-37.79376491,"Longitude":144.9702408},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Queen Victoria Gardens","Latitude":-37.82123671,"Longitude":144.9707706},{"Description":"Drinking fountain - unspecified type - Princes Park","Latitude":-37.78366245,"Longitude":144.9599986},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Kings Domain South","Latitude":-37.83352413,"Longitude":144.9834722},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.80750643,"Longitude":144.968505},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81884561,"Longitude":144.9483776},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.83463602,"Longitude":144.9748844},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.8127668,"Longitude":144.9815544},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81319699,"Longitude":144.9737447},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Miles & Dodds Street Reserve","Latitude":-37.82867399,"Longitude":144.9672265},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81232315,"Longitude":144.988933},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.78606714,"Longitude":144.9630699},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Shrine Gardens","Latitude":-37.83210002,"Longitude":144.9755443},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.8061169,"Longitude":144.9571334},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81437973,"Longitude":144.9760158},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Argyle Square","Latitude":-37.80225791,"Longitude":144.9661363},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Northbank Type","Latitude":-37.81933414,"Longitude":144.964437},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.78197129,"Longitude":144.9560684},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fawkner Park","Latitude":-37.84249232,"Longitude":144.9843962},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.80603705,"Longitude":144.95639},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81152641,"Longitude":144.9728037},{"Description":"Drinking Fountain - Unknown","Latitude":-37.82217775,"Longitude":144.938269},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81636425,"Longitude":144.9553989},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Carlton Gardens North","Latitude":-37.80154324,"Longitude":144.9707469},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Bayswater Road Park","Latitude":-37.79365821,"Longitude":144.9235261},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Parliament Reserve","Latitude":-37.80980632,"Longitude":144.9738344},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82024273,"Longitude":144.9596278},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82473471,"Longitude":144.9720881},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81328717,"Longitude":144.9892412},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82182652,"Longitude":144.957324},{"Description":"Drinking Fountain - Drinking Fountain - Monument Style Type 2 - Hardy Reserve","Latitude":-37.78528327,"Longitude":144.966192},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81783495,"Longitude":144.9593404},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Alexandra Gardens","Latitude":-37.820725,"Longitude":144.9706804},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fitzroy Gardens","Latitude":-37.81358697,"Longitude":144.9803405},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81262232,"Longitude":144.9569573},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Neill Street Reserve","Latitude":-37.79559474,"Longitude":144.9691367},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.79148138,"Longitude":144.9564034},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.78073096,"Longitude":144.9510874},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.8072992,"Longitude":144.9638064},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81600551,"Longitude":144.9651331},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.80786392,"Longitude":144.9610743},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.79431439,"Longitude":144.9302959},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81389218,"Longitude":144.9641121},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81881364,"Longitude":144.9429039},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81144127,"Longitude":144.9551163},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81999653,"Longitude":144.9597267},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82337609,"Longitude":144.9798517},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81056709,"Longitude":144.9677209},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Station Street Park","Latitude":-37.79735924,"Longitude":144.9739863},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Powlett Reserve","Latitude":-37.81108547,"Longitude":144.9868237},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.78297956,"Longitude":144.9418703},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Princes Park","Latitude":-37.78098686,"Longitude":144.9624565},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81013009,"Longitude":144.9910055},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81243581,"Longitude":144.9736844},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81601001,"Longitude":144.9727024},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.83822662,"Longitude":144.9845757},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.8164909,"Longitude":144.9851575},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Neill Street Reserve","Latitude":-37.79583501,"Longitude":144.9680721},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Errol Street Reserve","Latitude":-37.79923347,"Longitude":144.9504134},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.80711564,"Longitude":144.9559316},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Ievers Reserve","Latitude":-37.79686728,"Longitude":144.9520465},{"Description":"Drinking Fountain - Drinking Fountain - Monument Style Type 2","Latitude":-37.79825506,"Longitude":144.9705661},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.78858144,"Longitude":144.9262315},{"Description":"Drinking fountain - unspecified type - Alexandra Park","Latitude":-37.81957112,"Longitude":144.9718246},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.78144167,"Longitude":144.9559547},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81553989,"Longitude":144.9583664},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Clayton Reserve","Latitude":-37.7958179,"Longitude":144.9389228},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.79735381,"Longitude":144.9528437},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.79701104,"Longitude":144.9671944},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Docklands Park","Latitude":-37.82089073,"Longitude":144.9469299},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - JJ Holland Park","Latitude":-37.79813009,"Longitude":144.9217176},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.82018203,"Longitude":144.9606079},{"Description":"Drinking Fountain - Drinking Fountain - Monument Style Type 3","Latitude":-37.81840304,"Longitude":144.9788593},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Alexandra Park","Latitude":-37.82514309,"Longitude":144.978301},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Princes Park","Latitude":-37.78493695,"Longitude":144.9623393},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82416129,"Longitude":144.9438641},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.8111844,"Longitude":144.9751862},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Flagstaff Gardens","Latitude":-37.80979296,"Longitude":144.955102},{"Description":"Drinking Fountain - Concrete Drinking Fountain","Latitude":-37.84521416,"Longitude":144.9825614},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Fawkner Park","Latitude":-37.83912302,"Longitude":144.980296},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81752394,"Longitude":144.9601304},{"Description":"Drinking Fountain - Urban design stainless steel","Latitude":-37.79337819,"Longitude":144.9400483},{"Description":"Drinking Fountain - Drinking Fountain - Type 2 - Birrarung Marr","Latitude":-37.818174,"Longitude":144.971321},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.8072604,"Longitude":144.9578811},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81437202,"Longitude":144.9661333},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fitzroy Gardens","Latitude":-37.81426415,"Longitude":144.9786514},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Alexandra Gardens","Latitude":-37.82051807,"Longitude":144.9731853},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Carlton Gardens North","Latitude":-37.80211398,"Longitude":144.972831},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.8151857,"Longitude":144.9525776},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81841607,"Longitude":144.9465814},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Fawkner Park","Latitude":-37.84059103,"Longitude":144.984202},{"Description":"Drinking Fountain - Old Style Steel Drinking Fountain","Latitude":-37.80831892,"Longitude":144.9744525},{"Description":"Drinking fountain - unspecified type - North Melbourne Recreation Reserve","Latitude":-37.79931696,"Longitude":144.940529},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Northbank Type","Latitude":-37.82050899,"Longitude":144.9448585},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81544772,"Longitude":144.967055},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81261777,"Longitude":144.9683506},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.8208728,"Longitude":144.9418559},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.80201371,"Longitude":144.9578323},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80774275,"Longitude":144.9630865},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81803794,"Longitude":144.9566253},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Neill & Canning Street Reserve (CARLTON)","Latitude":-37.79333,"Longitude":144.9737416},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Alexandra Park","Latitude":-37.82760196,"Longitude":144.981947},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81536211,"Longitude":144.9797049},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Argyle Square","Latitude":-37.80262122,"Longitude":144.965638},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82838784,"Longitude":144.9844435},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80501832,"Longitude":144.9491104},{"Description":"Drinking Fountain - Ornamental Drinking Fountain - Errol St North Melbourne","Latitude":-37.80333644,"Longitude":144.9497305},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80725892,"Longitude":144.9469642},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Flagstaff Gardens","Latitude":-37.81010994,"Longitude":144.9536363},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81949229,"Longitude":144.944595},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81600813,"Longitude":144.945522},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Liddy Street Reserve (KENSINGTON)","Latitude":-37.79009686,"Longitude":144.925756},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81469518,"Longitude":144.9384774},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82034343,"Longitude":144.9403191},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81146826,"Longitude":144.9617507},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Fitzroy Gardens","Latitude":-37.81047413,"Longitude":144.9810666},{"Description":"Drinking Fountain - Duke & Duchess of York Memorial Drinking Fountain","Latitude":-37.80663191,"Longitude":144.9599133},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.8110051,"Longitude":144.9586216},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Northbank Type","Latitude":-37.82022018,"Longitude":144.9448075},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81767139,"Longitude":144.9462535},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81992694,"Longitude":144.9431459},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Eastwood and Rankins Park","Latitude":-37.79407413,"Longitude":144.930829},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80530265,"Longitude":144.9695583},{"Description":"Drinking Fountain - Drinking Fountain - Monument Style Type 2 - Argyle Square","Latitude":-37.80282308,"Longitude":144.9663007},{"Description":"Drinking Fountain - Leaf Type - With Bottle Refill Tap - Royal Park","Latitude":-37.79542994,"Longitude":144.9520281},{"Description":"Drinking fountain - Historic or Heritage fountains - Royal Park","Latitude":-37.78205389,"Longitude":144.9569702},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.8194284,"Longitude":144.9457882},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.78615201,"Longitude":144.9534929},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Princes Park","Latitude":-37.78866797,"Longitude":144.9624617},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80959362,"Longitude":144.9642404},{"Description":"Drinking Fountain - Old Style Steel Drinking Fountain","Latitude":-37.81692707,"Longitude":144.9837045},{"Description":"Drinking Fountain - Drinking Fountain - Type 2 - Birrarung Marr","Latitude":-37.81846601,"Longitude":144.9738821},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81496923,"Longitude":144.9603504},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Gardiner Reserve","Latitude":-37.79885784,"Longitude":144.9439962},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.79638204,"Longitude":144.9464447},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Pleasance Gardens","Latitude":-37.79630066,"Longitude":144.9450286},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Kings Domain","Latitude":-37.82880949,"Longitude":144.9741313},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.79515818,"Longitude":144.9710381},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.77733898,"Longitude":144.953278},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Grant Street Reserve","Latitude":-37.82601912,"Longitude":144.968213},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81818027,"Longitude":144.9712824},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81932148,"Longitude":144.942498},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Victoria Green","Latitude":-37.82012802,"Longitude":144.9448455},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.79639356,"Longitude":144.946449},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81486653,"Longitude":144.9793412},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.8127107,"Longitude":144.9653559},{"Description":"Drinking fountain - unspecified type - Gardiner Reserve","Latitude":-37.79899334,"Longitude":144.9433595},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81402271,"Longitude":144.9637759},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Boyd Community Hub (SOUTHBANK)","Latitude":-37.82553356,"Longitude":144.960998},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81655982,"Longitude":144.9584794},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81191195,"Longitude":144.9707693},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Royal Park","Latitude":-37.79511867,"Longitude":144.9509188},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.81337113,"Longitude":144.9435713},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81506309,"Longitude":144.968992},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80715296,"Longitude":144.9512862},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - JJ Holland Park","Latitude":-37.79745516,"Longitude":144.923493},{"Description":"Drinking Fountain - Drinking Fountain - Type 2 - Stock Route Reserve (KENSINGTON)","Latitude":-37.78858108,"Longitude":144.9262313},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81237811,"Longitude":144.9652121},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl - Fawkner Park","Latitude":-37.84340547,"Longitude":144.9823703},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80218636,"Longitude":144.9711102},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82449322,"Longitude":144.9456981},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81099949,"Longitude":144.9909654},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80221537,"Longitude":144.9630132},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81211636,"Longitude":144.9624266},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.7912513,"Longitude":144.9314758},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81607984,"Longitude":144.938627},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81105095,"Longitude":144.9671425},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Peppercorn Park","Latitude":-37.79256416,"Longitude":144.9226308},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81386555,"Longitude":144.9647509},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.81370346,"Longitude":144.9652482},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Princes Park","Latitude":-37.77990317,"Longitude":144.9610389},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Carlton Gardens South","Latitude":-37.80696317,"Longitude":144.9709753},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81428679,"Longitude":144.944819},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Carlton Gardens South","Latitude":-37.80596125,"Longitude":144.9714311},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81893926,"Longitude":144.9434869},{"Description":"Drinking Fountain - Drinking Fountain - Type 2 - Princes Park","Latitude":-37.78516928,"Longitude":144.962996},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82009961,"Longitude":144.9652041},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81906774,"Longitude":144.9545198},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Alexandra Park","Latitude":-37.82714363,"Longitude":144.9849204},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.80633684,"Longitude":144.9590745},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80931636,"Longitude":144.9545334},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81378184,"Longitude":144.9422586},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82139166,"Longitude":144.9453678},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fitzroy Gardens","Latitude":-37.81367564,"Longitude":144.9826852},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81033906,"Longitude":144.972424},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Shrine Gardens","Latitude":-37.83081555,"Longitude":144.9742751},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.81539727,"Longitude":144.940562},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Ievers Reserve","Latitude":-37.79634473,"Longitude":144.9529563},{"Description":"Drinking fountain - unspecified type - Alexandra Park","Latitude":-37.82792493,"Longitude":144.983545},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl - Fawkner Park","Latitude":-37.83991852,"Longitude":144.981296},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Shrine Gardens","Latitude":-37.832498,"Longitude":144.9728589},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82325678,"Longitude":144.9417699},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Birrarung Marr","Latitude":-37.81877098,"Longitude":144.9740816},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81331469,"Longitude":144.9666513},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fitzroy Gardens","Latitude":-37.81069333,"Longitude":144.9830719},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.77874397,"Longitude":144.952731},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - JJ Holland Park","Latitude":-37.79892449,"Longitude":144.9259559},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.813709,"Longitude":144.9652192},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Princes Park","Latitude":-37.78714504,"Longitude":144.9594465},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.79275281,"Longitude":144.9684434},{"Description":"Drinking Fountain - Wooden Slat Supports","Latitude":-37.78868612,"Longitude":144.9624221},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80899369,"Longitude":144.9728687},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Shrine Gardens","Latitude":-37.832243,"Longitude":144.9730285},{"Description":"Drinking Fountain - Concrete Drinking Fountain","Latitude":-37.77845422,"Longitude":144.9560351},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80049198,"Longitude":144.9637439},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.8205127,"Longitude":144.9439608},{"Description":"Drinking fountain - unspecified type - Royal Park","Latitude":-37.78020536,"Longitude":144.9529357},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.8033711,"Longitude":144.966364},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Newmarket Reserve","Latitude":-37.78784948,"Longitude":144.9245623},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.80626983,"Longitude":144.9580634},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81111515,"Longitude":144.9666279},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Queensbridge Sq Type","Latitude":-37.82099191,"Longitude":144.9617424},{"Description":"Drinking Fountain - Concrete & Steel Drinking Fountain","Latitude":-37.813799,"Longitude":144.9710664},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.8200637,"Longitude":144.9433501},{"Description":"Drinking fountain - Historic or Heritage Drinking Fountains - Warun Biik Park","Latitude":-37.79622591,"Longitude":144.9267532},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81839331,"Longitude":144.944678},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81443644,"Longitude":144.977743},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82118365,"Longitude":144.9464514},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.78533233,"Longitude":144.9534738},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.8211451,"Longitude":144.9429837},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fawkner Park","Latitude":-37.83791304,"Longitude":144.981874},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81775113,"Longitude":144.9668728},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81243005,"Longitude":144.9650154},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.78073363,"Longitude":144.9510903},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.77712489,"Longitude":144.9515067},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Sturt Street Reserve","Latitude":-37.82976204,"Longitude":144.9650239},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Shrine of Remembrance Reserve","Latitude":-37.82939489,"Longitude":144.9740264},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Clayton Reserve","Latitude":-37.79690983,"Longitude":144.9388702},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82842092,"Longitude":144.9846019},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.83070222,"Longitude":144.9761109},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80443768,"Longitude":144.9634305},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.78942634,"Longitude":144.925216},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Royal Park","Latitude":-37.79166435,"Longitude":144.9517569},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Northbank Type","Latitude":-37.82340947,"Longitude":144.9406532},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.82432252,"Longitude":144.9770545},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81043818,"Longitude":144.964098},{"Description":"Drinking Fountain - Drinking Fountain - Type 1","Latitude":-37.79206873,"Longitude":144.9297514},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Carlton Gardens North","Latitude":-37.80241729,"Longitude":144.9720229},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Carlton Gardens South","Latitude":-37.80719484,"Longitude":144.9726482},{"Description":"Drinking fountain - Historic or Heritage fountains - University Square","Latitude":-37.8014863,"Longitude":144.9602162},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.79382279,"Longitude":144.9580381},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81181692,"Longitude":144.9647358},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81678975,"Longitude":144.969337},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81790669,"Longitude":144.9663257},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Fitzroy Gardens","Latitude":-37.81569154,"Longitude":144.9822672},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81047951,"Longitude":144.9643462},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Batman Park","Latitude":-37.82220233,"Longitude":144.9566031},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.80056485,"Longitude":144.9668454},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.78606608,"Longitude":144.9630917},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Northbank Type","Latitude":-37.81937619,"Longitude":144.9642579},{"Description":"Drinking Fountain - Treated Timber Drinking Fountain - Parkville Gardens (PARKVILLE)","Latitude":-37.77955332,"Longitude":144.9398465},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Neill Street Reserve","Latitude":-37.7948604,"Longitude":144.9703253},{"Description":"Drinking Fountain - Leaf Type - Dog Bowl  - Fawkner Park","Latitude":-37.83863314,"Longitude":144.9780594},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bottle Refill Tap","Latitude":-37.81370589,"Longitude":144.9749027},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Ron Barassi Senior Park","Latitude":-37.81714667,"Longitude":144.9341036},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81515985,"Longitude":144.9371255},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.82000241,"Longitude":144.9437626},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.80749726,"Longitude":144.9685062},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Hawke and Adderley Street Park","Latitude":-37.80886672,"Longitude":144.9448781},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type - Bellair Street Reserve","Latitude":-37.79552677,"Longitude":144.9307542},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.81342795,"Longitude":144.9427742},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Leaf Type","Latitude":-37.81555894,"Longitude":144.9398977},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.82016422,"Longitude":144.9419807},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.81966892,"Longitude":144.9417578},{"Description":"Drinking Fountain - Stainless Steel Drinking Fountain - Old Docklands Type","Latitude":-37.82093619,"Longitude":144.9430288}]
+	  var toilet = [{"name":"Public Toilet - Queen Victoria Market (153 Victoria Street)","lat":-37.8061215,"lon":144.9565384},{"name":"Public Toilet - Victoria Harbour, Shed 3 (North Wharf Road)","lat":-37.81979598,"lon":144.9376654},{"name":"Public Toilet - Victoria Harbour, Shed 2 (North Wharf Road)","lat":-37.81892446,"lon":144.9342385},{"name":"Public Toilet - Toilet 169 - Batman Park (2A Spencer Street)","lat":-37.82172068,"lon":144.9555781},{"name":"Public Toilet - Toilet 102 - Fawkner Park, North Pavilion (Male)","lat":-37.84014769,"lon":144.9813831},{"name":"Public Toilet - Toilet 173 - JJ Holland Park, Skate Park (113 Kensington Road)","lat":-37.79806402,"lon":144.9211058},{"name":"Public Toilet - Toilet 137 - Faraday Street (Opposite 208-212 Faraday Street)","lat":-37.7987096,"lon":144.9675939},{"name":"Public Toilet - Toilet 105 -Sturt Street Reserve (280 Sturt Street)","lat":-37.83013254,"lon":144.9650122},{"name":"Public Toilet - Toilet 131 - Royal Park (Flemington Rd - Near North Park Tennis Club)","lat":-37.79017441,"lon":144.9436691},{"name":"Public Toilet - Toilet 11 - Lonsdale Street (Opposite 88 Lonsdale Street)","lat":-37.81003568,"lon":144.9699025},{"name":"Public Toilet - Toilet 119 - Fitzroy Gardens Toilets (150 Clarendon Street)","lat":-37.81203206,"lon":144.9830797},{"name":"Public Toilet - Toilet 127 - Princes Park Royal Parade (near Park Street)","lat":-37.77893699,"lon":144.9604666},{"name":"Public Toilet - Toilet 111 - Birrarung Marr Speakers Corner","lat":-37.82100478,"lon":144.9759332},{"name":"Public Toilet - Queen Victoria Market (465 Queen Street)","lat":-37.807864,"lon":144.9579478},{"name":"Public Toilet - Toilet 42 - Fawkner Park, Opposite 55 Commercial Road","lat":-37.84520656,"lon":144.9826144},{"name":"Public Toilet - Toilet 44 - Fawkner Park, Opposite 150W Toorak Road","lat":-37.83825284,"lon":144.9843892},{"name":"Public Toilet - Toilet 142 - Queensberry Street (Adjacent 179 Queensberry Street)","lat":-37.8046418,"lon":144.9628502},{"name":"Public Toilet - Toilet 52 - Princes Park (Adjacent Southern Sports Pavilion)","lat":-37.78790483,"lon":144.9594948},{"name":"Public Toilet - Toilet 43 - Queen Street (opposite 113 Queen Street)","lat":-37.81583817,"lon":144.9610621},{"name":"Public Toilet - Toilet 110 - Queen Victoria Gardens (Linlithgow Avenue)","lat":-37.82294829,"lon":144.9709857},{"name":"Public Toilet - Toilet 140 - Queensberry Street (Opposite 286 Queensberry Street)","lat":-37.80399463,"lon":144.9590907},{"name":"Public Toilet - Toilet 106 - Kings Domain Government House Drive","lat":-37.82691575,"lon":144.9746478},{"name":"Public Toilet - Toilet 6 - Elizabeth Street (Toilet Adjacent 200 Elizabeth Street)","lat":-37.81383779,"lon":144.9630972},{"name":"Public Toilet - Toilet 128 - Princes Park South Playground (Princes Park Drive)","lat":-37.78559839,"lon":144.9630354},{"name":"Public Toilet - Toilet 154 - Flagstaff Gardens (cnr William & Dudley)","lat":-37.80892048,"lon":144.9550433},{"name":"Public Toilet - Toilet 14 - Flinders Street (27 Flinders Street)","lat":-37.81598983,"lon":144.9727984},{"name":"Public Toilet - Yarra's Edge (160-186 Lorimer Street, No 19 Berth)","lat":-37.82124828,"lon":144.9345265},{"name":"Public Toilet - Toilet 107 - Alexandra Park","lat":-37.82764305,"lon":144.9818117},{"name":"Public Toilet - Saint Mangos Lane, The Palladio (New Quay)","lat":-37.81435831,"lon":144.9416822},{"name":"Public Toilet - Toilet 6 - Elizabeth Street (Toilet Adjacent 200 Elizabeth Street)","lat":-37.81343921,"lon":144.9629227},{"name":"Public Toilet - Toilet 1 - Lonsdale Street (Opposite 581 Lonsdale Street)","lat":-37.81434552,"lon":144.9551179},{"name":"Public Toilet - Toilet 145 - Carlton Gardens South (Opposite 39 Rathdowne Street)","lat":-37.80625893,"lon":144.9692027},{"name":"Public Toilet - Royal Park Brens Pavilion","lat":-37.78622125,"lon":144.9550009},{"name":"Public Toilet - Toilet 177 - Bellair Street (Opposite 180 Bellair Street)","lat":-37.79373229,"lon":144.9303519},{"name":"Public Toilet - Toilet 7 - Latrobe Street (Adjacent 120 La Trobe Street)","lat":-37.80894207,"lon":144.9656488},{"name":"Public Toilet - Toilet 124 - Nicholson Street (1A Nicholson Street)","lat":-37.80945203,"lon":144.973077},{"name":"Public Toilet - Toilet 4 - Market Street (Opposite 74 Market Street)","lat":-37.81746989,"lon":144.9602543},{"name":"Public Toilet - Toilet 138 - Carlton Gardens North (Opposite 199 Rathdowne Street)","lat":-37.80264555,"lon":144.9698213},{"name":"Public Toilet - Toilet 133- Canning Street Reserve (49 Princes Street)","lat":-37.79301168,"lon":144.9739949},{"name":"Public Toilet - Toilet 181 - Point Park (Point Park Crescent)","lat":-37.82331083,"lon":144.9418276},{"name":"Public Toilet - Toilet 36 - Lonsdale Street (Opposite 424 Lonsdale Street)","lat":-37.8129331,"lon":144.9600121},{"name":"Public Toilet - Ron Barassi Senior Park Pavilion","lat":-37.81722059,"lon":144.9340027},{"name":"Public Toilet - Town Hall Melbourne (200 Collins Street)","lat":-37.81521577,"lon":144.9669433},{"name":"Public Toilet - Royal Park Golf Course Club House","lat":-37.78187132,"lon":144.9561425},{"name":"Public Toilet - Newmarket Reserve (26 Smithfield Road)","lat":-37.78848882,"lon":144.9235637},{"name":"Public Toilet - Toilet 118 - Fitzroy Gardens (2 Lansdowne Street)","lat":-37.81528281,"lon":144.9775933},{"name":"Public Toilet - Toilet 13 - Exhibition Street (Opposite 77 Exhibition Street)","lat":-37.81384642,"lon":144.9713741},{"name":"Public Toilet - Toilet 146 - Swanston Street (Opposite 475-511 Swanston Street)","lat":-37.80680577,"lon":144.9626485},{"name":"Public Toilet - Toilet 12 - Exhibition Street (Opposite 242 Exhibition Street)","lat":-37.80954605,"lon":144.9694071},{"name":"Public Toilet - Toilet 117 - Powlett Reserve (Opposite 128 Albert Street)","lat":-37.81094233,"lon":144.9868587},{"name":"Public Toilet - Toilet 182 - Docklands Park South - 25 Harbour Esplanade","lat":-37.8217586,"lon":144.9473834},{"name":"Public Toilet - Toilet 102 - Fawkner Park, North Pavilion (Female)","lat":-37.84001779,"lon":144.981227},{"name":"Public Toilet - Toilet 170 - Queensberry Street (Opposite 530 Queensberry Street)","lat":-37.80307787,"lon":144.9498652},{"name":"Public Toilet - Queen Victoria Market - (Meat Hall / \"H\" Shed)","lat":-37.80682129,"lon":144.958747},{"name":"Public Toilet - Toilet 122 - Treasury Gardens (Store and Toilet)","lat":-37.81341844,"lon":144.977467},{"name":"Public Toilet - Toilet 34 - Franklin Street (Opposite 80 Franklin Street)","lat":-37.80823545,"lon":144.9601898},{"name":"Public Toilet - Toilet 3 - Flinders Street (399 Flinders Street)","lat":-37.81940611,"lon":144.9612768},{"name":"Public Toilet - Toilet 120 - Royal Park, Wetland (off Oak Street)","lat":-37.78303248,"lon":144.9418564},{"name":"Public Toilet - Toilet 162 - JJ Holland Park (Opposite, 48 Altona Street)","lat":-37.79812546,"lon":144.9264247},{"name":"Public Toilet - Queen Victoria Market (Food Court - 65-81 Victoria Street)","lat":-37.80637962,"lon":144.9590578},{"name":"Public Toilet - Toilet 103 - Kings Domain South (Opposite 169 Domain Road)","lat":-37.83393827,"lon":144.981784},{"name":"Public Toilet - Toilet 48 - Birrarung Marr (Opposite Artplay)","lat":-37.81859887,"lon":144.9710596},{"name":"Public Toilet - Toilet 178 -  Argyle Place North (Opposite 4 Argyle Place North)","lat":-37.80207629,"lon":144.966424},{"name":"Public Toilet - Toilet 100 - Royal Park - Native Garden (off Gatehouse Street)","lat":-37.79251146,"lon":144.9568517},{"name":"Public Toilet - Toilet 172 - Southbank Promenade (opposite Esso House)","lat":-37.82034213,"lon":144.9642197},{"name":"Public Toilet - Toilet 46 - Bourke Street (opposite 225 Bourke Street)","lat":-37.81324543,"lon":144.9668966},{"name":"Public Toilet - Toilet 109 - Kings Domain Myer Music Bowl Rear of","lat":-37.8228916,"lon":144.975281},{"name":"Public Toilet - Toilet 125 - Gordon Reserve (74-108 Spring Street)","lat":-37.81224078,"lon":144.9739256},{"name":"Public Toilet - Toilet 55 - Royal Park (Nature Play, Opposite 51 Gatehouse Street)","lat":-37.79552315,"lon":144.952143},{"name":"Public Toilet - Toilet 112 - Alexandra Gardens (Riverslide Skate Park)","lat":-37.82035527,"lon":144.9733129},{"name":"Public Toilet - Toilet 179 - Lincoln Square (138-142 Bouverie Street)","lat":-37.80271182,"lon":144.9622681},{"name":"Public Toilet - Toilet 104 - Kings Domain South (off Birdwood Avenue)","lat":-37.83085749,"lon":144.9751694},{"name":"Public Toilet - Toilet 41 - Flinders Street (No 245 Flinders Street Station)","lat":-37.8179032,"lon":144.9662643},{"name":"Public Toilet - Toilet 136 - Ievers Reserve - Flemington Road","lat":-37.796799,"lon":144.9519667}];
+      var locations = [["RACV - Bourke St / New Chancery Ln - City",-37.815505,144.959278],["Flagstaff Gardens - Peel St - West Melbourne",-37.809216,144.955223],["Plum Garland Reserve - Beaconsfield Pde - Albert Park",-37.847795,144.948351],["Siddeley St / Seafarers Bridge - Docklands",-37.823124,144.951918],["Queens Rd / Bowen Cres - Melbourne",-37.835383,144.973699],["Luna Park - Lower Esp - St Kilda",-37.867068,144.976428],["South Melbourne Market - York St / Cecil St - South Melbourne",-37.831475,144.957511],["VCAM - St Kilda Rd / Southbank Blvd - Southbank",-37.824088,144.970085],["Museum - Rathdowne St - Carlton",-37.803868,144.969609],["Jolimont Station - Wellington Pde South - East Melbourne",-37.816731,144.982006],["ACCA - Sturt St - Southbank",-37.826578,144.966542],["ANZ - Collins St - Docklands",-37.821568,144.944488],["RMIT - Swanston St / Franklin St - City",-37.807699,144.963095],["Napier St / Victoria Pde - Fitzroy",-37.808266,144.979005],["Aquarium - Kings Way / Flinders St - City",-37.821324,144.958318],["Rod Laver Arena - Batman Ave / Swan St - City",-37.822987,144.978459],["Domain Interchange - Park St / St Kilda Rd - Melbourne",-37.832396,144.971678],["Kings Way / St Kilda Rd - Melbourne",-37.836323,144.975162],["Spring St / Collins St - City",-37.813774,144.974054],["Victoria Market - Elizabeth St / Victoria St - City",-37.806091,144.959017],["State Library - Swanston St / Little Lonsdale St - City",-37.810702,144.964417],["Bourke Street Mall - 205 Bourke St - City",-37.813088,144.967437],["Melbourne Uni - Tin Alley - Carlton",-37.79625,144.960858],["St Paul's Cathedral - Swanston St / Flinders St - City",-37.817189,144.967409],["MSAC - Aughtie Dve - Albert Park",-37.842395,144.961868],["Fitzroy Town Hall - Moor St - Fitzroy",-37.801813,144.979209],["Coventry St / St Kilda Rd - Southbank",-37.828887,144.970822],["NAB - Harbour Esp / Bourke St - Docklands",-37.818306,144.945923],["Yarra's Point - Lorimer St / Yarra River - Docklands",-37.823805,144.943051],["Argyle Square - Lygon St - Carlton",-37.802129,144.96677],["Harbour Town - Docklands Dve - Docklands",-37.814022,144.939521],["Parliament Station - Nicholson St / Albert St - City",-37.809072,144.972762],["Bridport St / Montague St - Albert Park",-37.840885,144.955303],["Pickles St / Ingles St - Port Melbourne",-37.835803,144.94852],["Yarra's Edge - River Esp / Yarra River - Docklands",-37.824468,144.946033],["North Melbourne Station - Adderley St - North Melbourne",-37.807021,144.941854],["Sandridge Bridge - Southbank",-37.820836,144.962266],["Beach St - Port Melbourne",-37.841954,144.935296],["New Quay Prom / Harbour Esp - Docklands",-37.814117,144.944081],["Queensbridge St / Yarra River - Southbank",-37.821071,144.961113],["Southern Cross Station - Spencer St - City",-37.818124,144.953581],["Gasworks Arts Park - Pickles St - Albert Park",-37.842174,144.946051],["Cleve Gardens - Fitzroy St - St Kilda",-37.861984,144.97341],["West Beach Pavilion - Beaconsfield Pde - St Kilda West",-37.858553,144.969101],["Yorkshire Brewery - Wellington St - Collingwood",-37.805997,144.986953],["Fitzroy Street - St Kilda",-37.858655,144.978818],["Coventry St / Clarendon St - South Melbourne",-37.831776,144.960818],["University Square - Grattan St - Carlton",-37.800214,144.960313],["Richmond Station - Brunton Ave - East Melbourne",-37.822962,144.988507],["Federation Square - Flinders St / Swanston St - City",-37.817523,144.967814]]
+      var bikeMarkers = [];
+      var parkMarkers = [];
+      var toiletMarkers = [];
+      var waterMarkers = [];
+      var clicked;
+      var total;
+      var geocoder;
+      var map;
+      var start;
+      var distence1 = [];
+      var distence2 = [];
+      var distence3 = [];
+      var distence4 = [];
+      function initMap() {
+      	   	var directionsService2 = new google.maps.DirectionsService;
+        var directionsDisplay2 = new google.maps.DirectionsRenderer;
+         map = new google.maps.Map(document.getElementById('map'), {
+          mapTypeControl: false,
+          streetViewControl: false,
+          center: {lat: -37.8100512, lng: 144.9281496},
+          zoom: 13
+        });
+        new AutocompleteDirectionsHandler(map);
+          var geocoder = new google.maps.Geocoder();
+
+       
+
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            start = pos;
+			var marker = new google.maps.Marker({
+          	position: pos,
+          	map: map,
+          	title: 'Hello World!'
+        }); 
+        		infoWindow.open(map);
+            map.setCenter(pos);
+                       	directionsDisplay2.setMap(map);
+
+        var p1 = new google.maps.LatLng(start.lat, start.lng);  	
+		var marker, i;
+		var count = 0;
+		for (i = 0; i < locations.length; i++) { 
+		var p2 = new google.maps.LatLng(locations[i][1], locations[i][2]);
+		var distance = google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+   	 	var x = [distance,locations[i][1],locations[i][2]]
+   		distence1.push(x);
+    	}
+	distence1.sort(function(a,b){
+    if(a[0]<b[0]){
+        return -1;
+    }
+    if(a[0]>b[0]){
+       return 1;
+    }
+    return 0;
+});
+for(var c = 0; c < 3;c++){
+marker = new google.maps.Marker({
+        position: new google.maps.LatLng(distence1[c][1], distence1[c][2]),
+        icon: "img/bicycle-2.png",
+        map: map    
+    });
+     bikeMarkers.push(marker);
+    marker.setVisible(false);
+    showDirection(marker,directionsService2,directionsDisplay2);
+}		
+	var address1 = new google.maps.LatLng(distence1[0][1], distence1[0][2])
+  geocoder.geocode({'location': address1}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+			document.getElementById("address1").innerHTML = results[0].formatted_address;
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+        document.getElementById("distance1").innerHTML = (0|distence1[0][0]) + " miles";
+	for (i = 0; i < drinking.length; i++) { 
+		var p2 = new google.maps.LatLng(drinking[i].Latitude, drinking[i].Longitude);
+		var distance = google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+   	 	var x = [distance,drinking[i].Latitude, drinking[i].Longitude]
+   		distence2.push(x);
+    	}
+	distence2.sort(function(a,b){
+    if(a[0]<b[0]){
+        return -1;
+    }
+    if(a[0]>b[0]){
+       return 1;
+    }
+    return 0;
+});
+for(var c = 0; c < 3;c++){
+marker = new google.maps.Marker({
+        position: new google.maps.LatLng(distence2[c][1], distence2[c][2]),
+        icon: "img/drinking fountain.png",
+        map: map    
+    });
+    waterMarkers.push(marker);
+    marker.setVisible(false);
+    showDirection(marker,directionsService2,directionsDisplay2);
+}	
+var address2 = new google.maps.LatLng(distence2[0][1], distence2[0][2])
+  geocoder.geocode({'location': address2}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+			document.getElementById("address4").innerHTML = results[0].formatted_address;
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+        document.getElementById("distance4").innerHTML = (0|distence2[0][0]) + " miles";
+for (i = 0; i < toilet.length; i++) { 
+		var p2 = new google.maps.LatLng(toilet[i].lat, toilet[i].lon);
+		var distance = google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+   	 	var x = [distance,toilet[i].lat, toilet[i].lon]
+   		distence3.push(x);
+    	}
+	distence3.sort(function(a,b){
+    if(a[0]<b[0]){
+        return -1;
+    }
+    if(a[0]>b[0]){
+       return 1;
+    }
+    return 0;
+});
+for(var c = 0; c < 3;c++){
+marker = new google.maps.Marker({
+        position: new google.maps.LatLng(distence3[c][1], distence3[c][2]),
+        icon: "img/toilet.png",
+        map: map    
+    });
+    toiletMarkers.push(marker);
+    marker.setVisible(false);
+    showDirection(marker,directionsService2,directionsDisplay2);
+}
+var address3 = new google.maps.LatLng(distence3[0][1], distence3[0][2])
+  geocoder.geocode({'location': address3}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+			document.getElementById("address3").innerHTML = results[0].formatted_address;
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+        document.getElementById("distance3").innerHTML = (0|distence3[0][0]) + " miles";
+for (i = 0; i < parking.length; i++) { 
+		var p2 = new google.maps.LatLng(parking[i].Latitude, parking[i].Longitude);
+		var distance = google.maps.geometry.spherical.computeDistanceBetween(p1, p2);
+   	 	var x = [distance,parking[i].Latitude, parking[i].Longitude]
+   		distence4.push(x);
+    	}
+	distence4.sort(function(a,b){
+    if(a[0]<b[0]){
+        return -1;
+    }
+    if(a[0]>b[0]){
+       return 1;
+    }
+    return 0;
+});
+for(var c = 0; c < 3;c++){
+marker = new google.maps.Marker({
+        position: new google.maps.LatLng(distence4[c][1], distence4[c][2]),
+        icon: "img/parking sign.png",
+        map: map    
+    });
+    parkMarkers.push(marker);
+    marker.setVisible(false);
+    showDirection(marker,directionsService2,directionsDisplay2);
+}	
+var address4 = new google.maps.LatLng(distence4[0][1], distence4[0][2])
+  geocoder.geocode({'location': address4}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+			document.getElementById("address2").innerHTML = results[0].formatted_address;
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+        document.getElementById("distance2").innerHTML = (0|distence4[0][0]) + " miles";
+		
+		/*for (i = 0; i < parking.length; i++) { 
+		marker = new google.maps.Marker({
+        position: new google.maps.LatLng(parking[i].Latitude, parking[i].Longitude),
+        icon:"img/bike.png",
+        map: map    
+   });
+     parkMarkers.push(marker);
+     marker.setVisible(false);
+     showDirection(marker,directionsService2,directionsDisplay2);
+    }*/
+
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      
+      }
+      
+      
+
+       /**
+        * @constructor
+       */
+      function AutocompleteDirectionsHandler(map) {
+        this.map = map;
+        this.originPlaceId = null;
+        this.destinationPlaceId = null;
+        this.travelMode = 'WALKING';
+        var originInput = document.getElementById('origin-input');
+        var destinationInput = document.getElementById('destination-input');
+        var modeSelector = document.getElementById('mode-selector');
+        this.directionsService = new google.maps.DirectionsService;
+        this.directionsDisplay = new google.maps.DirectionsRenderer;
+        this.directionsDisplay.setMap(map);
+
+        var originAutocomplete = new google.maps.places.Autocomplete(
+            originInput, {placeIdOnly: true});
+        var destinationAutocomplete = new google.maps.places.Autocomplete(
+            destinationInput, {placeIdOnly: true});
+
+        this.setupClickListener('changemode-walking', 'WALKING');
+        this.setupClickListener('changemode-transit', 'TRANSIT');
+        this.setupClickListener('changemode-driving', 'DRIVING');
+
+        this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
+        this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
+      }
+
+      // Sets a listener on a radio button to change the filter type on Places
+      // Autocomplete.
+      AutocompleteDirectionsHandler.prototype.setupClickListener = function(id, mode) {
+        var radioButton = document.getElementById(id);
+        var me = this;
+        radioButton.addEventListener('click', function() {
+          me.travelMode = mode;
+          me.route();
+        });
+      };
+
+      AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
+        var me = this;
+        autocomplete.bindTo('bounds', this.map);
+        autocomplete.addListener('place_changed', function() {
+          var place = autocomplete.getPlace();
+          if (!place.place_id) {
+            window.alert("Please select an option from the dropdown list.");
+            return;
+          }
+          if (mode === 'ORIG') {
+            me.originPlaceId = place.place_id;
+          } else {
+            me.destinationPlaceId = place.place_id;
+          }
+          me.route();
+        });
+
+      };
+
+      AutocompleteDirectionsHandler.prototype.route = function() {
+        if ( !this.destinationPlaceId) {
+          return;
+        }
+       var me = this;
+       var geocoder = new google.maps.Geocoder;
+       var lat1;
+       var log1;
+       var lat2;
+       var log2;
+
+        this.directionsService.route({
+          origin: start,
+          destination: {'placeId': this.destinationPlaceId},
+          travelMode: this.travelMode
+        }, function(response, status) {
+          if (status === 'OK') {
+          	me.directionsDisplay.setDirections(response);
+            var result = me.directionsDisplay.getDirections();
+            var thisMode = result.request.travelMode;
+            var total1 = 0;
+            var time = 0;
+        		var myroute = result.routes[0];
+        		var p1 = new google.maps.LatLng(lat1, log1); 
+       		var p3 = new google.maps.LatLng(lat2, log2); 
+           for (var i = 0; i < myroute.legs.length; i++) {
+         	 total1 += myroute.legs[i].distance.value;
+         	 time += myroute.legs[i].duration.value;
+        		}
+       		total1 = total1 / 1000;    
+       		document.getElementById("checkcontrol").style.display= "flex";
+			showBike();
+			showDrink();
+			showPark();
+			showToilet();
+          } else {
+            window.alert('Directions request failed due to ' + status);
+          }
+        });
+      };
+       function showBike(){
+       	for (var t = 0;t < bikeMarkers.length; t++){
+       		 if (!bikeMarkers[t].getVisible()) {
+            bikeMarkers[t].setVisible(true);
+        } else {
+            bikeMarkers[t].setVisible(false);
+            
+        }
+       	}	
+       }
+       function showDrink(){
+       	for (var t = 0;t < waterMarkers.length; t++){
+       		 if (!waterMarkers[t].getVisible()) {
+            waterMarkers[t].setVisible(true);
+        } else {
+            waterMarkers[t].setVisible(false);
+        }
+       	}	
+       }
+       function showPark(){
+       	for (var t = 0;t < parkMarkers.length; t++){
+       		 if (!parkMarkers[t].getVisible()) {
+            parkMarkers[t].setVisible(true);
+        } else {
+            parkMarkers[t].setVisible(false);
+        }
+       	}	
+       }
+       function showToilet(){
+       	for (var t = 0;t < toiletMarkers.length; t++){
+       		 if (!toiletMarkers[t].getVisible()) {
+            toiletMarkers[t].setVisible(true);
+        } else {
+            toiletMarkers[t].setVisible(false);
+        }
+       	}	
+       }
+        function showDirection(marker,directionsService2,directionsDisplay2) {
+
+        marker.addListener('click', function() {
+          clicked = marker.getPosition();
+       calculatefootprint(directionsService2, directionsDisplay2,clicked)
+      })
+       }
+        function calculatefootprint(directionsService2, directionsDisplay2,clicked) {
+        directionsService2.route({
+          origin: start,
+          destination: clicked,
+          travelMode: 'WALKING'
+        }, function(response, status) {
+          if (status === 'OK') {
+            directionsDisplay2.setDirections(response);
+          } else {
+            window.alert('can not find the address you entered ');
+          }
+        });
+ 
+       }
+    </script>
+  
+     <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&libraries=geometry"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBVLIu5YPn5cZXXGKqmyirL1-08uyh_WM&libraries=places&callback=initMap"
+        async defer></script>
+    
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+
+          <script>
+    	var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=Melbourne&APPID=636d4d479e4d9c3e18c25b2d52cfeaf5&units=metric";
+
+$.getJSON(queryURL, function (data) {
+var timer = 24; 
+var d1 = new Date(); 
+var d2 = new Date();
+d1.setHours(+d2.getHours()+(timer/8) ); 
+var hour = d1.getHours();
+$('#h1').append(hour + " : " + "00");
+d1.setHours(+d2.getHours()+(timer/4) ); 
+var hour2 = d1.getHours();
+$('#h2').append(hour2 + " : " + "00");
+d1.setHours(+d2.getHours()+(timer*3/8) ); 
+var hour2 = d1.getHours();
+$('#h3').append(hour2 + " : " + "00");
+
+  var results = data.list[0];
+  var desc =  results.weather[0].description;
+
+
+  var curdesc = results.main.temp;
+  var result1 = data.list[5];
+  var desc1 =  result1.weather[0].description;
+
+
+
+  var curdesc1 = result1.main.temp;
+  var result2 = data.list[6];
+  var desc2 =  result2.weather[0].description;
+  var curdesc2 = result2.main.temp;
+  
+  var result3= data.list[7];
+  var curdesc3 = result3.main.temp;
+  var desc3 =  result3.weather[0].description;
+
+  
+  $('#tianqi').append("Now: " + curdesc + " ℃");
+  $('#3h').append( curdesc1 + " ℃");
+  $('#6h').append( curdesc2 + " ℃");
+  $('#9h').append( curdesc3 + " ℃");
+  
+    $('#tianqi').append(", " + desc);
+  $('#tianqi1').append(desc1);
+  $('#tianqi2').append( desc2);
+  $('#tianqi3').append( desc3);
+
+})
+
+
+    </script>
+    <script>
+        AOS.init({
+            duration: 1200,
+          })
+          </script>
+  </body>
+  <div class="newfooter">
+      <p>© 2018 Eco Melbourne</p>
+  </div>
+</html>

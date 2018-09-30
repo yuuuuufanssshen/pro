@@ -45,9 +45,9 @@ background-color: #FFFFFF;
  }
  .newfooter{
 	width:100%;
-	height: 3%;
+	
 	bottom: 0;
-	background-color: #000000;
+	background-color: #f05f40;
 }
 .newfooter p{
 	color: #FFFFFF;
@@ -62,7 +62,7 @@ header.header2{
 header.header3{
 	width: 100%;
 	height: 40%;
-	background-image: url(../img/bikebg1.jpg);	
+	background-image: url(../img/background.jpg);	
 	background-size: cover;
 	background-position: 100%,100%;
 	 background-repeat: no-repeat;
@@ -73,26 +73,18 @@ header.header3{
 	margin-top: 15%;
 	background-color: background-color: rgba(176,224,230,0.5);;
 }
-.bar{
-	fill:#5f89ad;
-}
-.axis{
-	font-size: 13px;
-	
-}
+.axis {
+   font: 10px sans-serif;
+ }
 
-   .bar {
-          
-            fill: #5f89ad;
-        }
-        
-        .axis {
-            font-size: 13px;
-        }
-        
-        .axis path,
-        .axis line {
-            fill: none;
-            display: none;
-        }
+ .axis path{
+ 	stroke :black;
+    fill: none;
+ 	
+ },
+ .axis line {
+   fill: none;
+   stroke: #000;
+   shape-rendering: crispEdges;
+ }
         

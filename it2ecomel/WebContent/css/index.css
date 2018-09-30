@@ -135,3 +135,30 @@ header.masthead h1 {
     max-width: 70% !important;
 }
 }
+.rectangle {
+	fill: steelblue;
+}
+.rectangle:hover {
+	fill: orange;
+}
+.axis {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.chart-container {
+            width: 70%;
+            height:350px;
+            margin-top:10%;
+}
+.chart2-container {
+            width: 50%;
+            height:30%;
+            margin-top:10%;
+            margin-left: 30%;
+}

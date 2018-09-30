@@ -23,15 +23,16 @@
 
     <!-- Custom styles for this template -->
     <link href="css/creative.min.css" rel="stylesheet">
-
+	<link href="css/index.css" rel="stylesheet">
   </head>
 
   <body id="page-top">
 
     <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="index.html">Eco Melbourne</a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Eco Melbourne</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,15 +42,16 @@
               <a class="nav-link js-scroll-trigger" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-            	 <a class="nav-link js-scroll-trigger" href="data.html">Statistics</a>
+                <a class="nav-link js-scroll-trigger" href="calculator.html">Footprint Calculator</a>
 
             </li>
             
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="calculator.html">Footprint Calculator</a>
+              
+              <a class="nav-link js-scroll-trigger" href="bikeintro.html">Eco-Journey Planner</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="bikeintro.html">Find-bike</a>
+                <a class="nav-link js-scroll-trigger" href="data.html">Statistics</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="about.html">About Us</a>
@@ -66,21 +68,21 @@
       </div>
     </header>
 <section>
-	
-  	<div class="container">
+	<div id="drop" align=center></div>
 
-<h1 style="margin-top:3%;color: #28A745;">CO<sub>2</sub> emissions in Australia</h1>
-                    <p style="color: #000000;"></p>
-  </div>
-  <div class='tableauPlaceholder' id='viz1536749985103' style='position: relative;margin-left:20% ;'><noscript><a href='#'><img alt='au co2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;au&#47;auco2&#47;auco2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='auco2&#47;auco2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;au&#47;auco2&#47;auco2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1536749985103');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='900px';vizElement.style.height='627px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
- <br>
- 	<br>
- 	            <a class="btn btn-primary btn-xl js-scroll-trigger" href="forecast.html" style="margin-left: 45%;margin-top: 3%;">See the forecast</a>
-
+	<div id="graphic1"></div>
+	<div class="chart-container">
+    <canvas id="line-chart"></canvas>
+</div>
+  	<div class='tableauPlaceholder' id='viz1538310454387' style='position: relative'><noscript><a href=' '>< img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Book123_171&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a ></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='views&#47;Book123_171&#47;Dashboard1?:embed=y&amp;:display_count=y&amp;publish=yes' /> <param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;&#47;&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1538310454387');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='800px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class="chart2-container">
+    <canvas id="pie-chart"></canvas>
+</div>
 </section>
-  
+  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -90,8 +92,236 @@
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
 <div class="newfooter">
-	<p style="margin-left: 45%;">© 2018 Eco Melbourne</p>
+	<p>© 2018 Eco Melbourne</p>
 </div>
+
+      <script src="https://d3js.org/d3.v3.min.js"></script>
+<script>
+ var locations ;
+  var map;
+  var marker;
+  var config = {
+    apiKey: "AIzaSyBGd_L0GlryiZlZs5Wwnq9XQ8EghyOAbuk",
+    authDomain: "iedatabase-3928e.firebaseapp.com",
+    databaseURL: "https://iedatabase-3928e.firebaseio.com",
+    projectId: "iedatabase-3928e",
+    storageBucket: "iedatabase-3928e.appspot.com",
+    messagingSenderId: "929702593631"
+  };
+  firebase.initializeApp(config);
+  var ref = firebase.database().ref().child("forecast");
+   ref.once("value", function(snapshot) {
+  	var data = snapshot.val();
+  	var margin = {top:20, right: 180, bottom: 80, left: 180},
+    width = 960 - margin.left - margin.right,
+    height = 360 - margin.top - margin.bottom;
+
+var svg = d3.select("#graphic1").append("svg")
+	.attr("preserveAspectRatio", "xMidYMid meet")
+    .attr("viewBox", "-250 -300 1500 1500")
+	.append("g")
+	
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	    console.log(data);
+
+	// filter year
+	var data = data.filter(function(d){return d.Country == 'au';});
+	// Get every column value
+	var elements = Object.keys(data[0])
+		.filter(function(d){
+			return ((d != "Year") & (d != "Country"));
+		});
+	var selection = elements[0];
+
+	var y = d3.scale.linear()
+			.domain([0, d3.max(data, function(d){
+				return +d[selection];
+			})])
+			.range([height, 0]);
+
+	var x = d3.scale.ordinal()
+			.domain(data.map(function(d){ return d.Year;}))
+			.rangeBands([0, width]);
+
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+	    .orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+	    .orient("left");
+
+	svg.append("g")
+    	.attr("class", "x axis")
+    	.attr("transform", "translate(0," + height + ")")
+    	.call(xAxis)
+    	.selectAll("text")
+    	.style("font-size", "8px")
+      	.style("text-anchor", "end")
+      	.attr("dx", "-.9em")
+      	.attr("dy", "-.55em")
+      	.attr("transform", "rotate(-70)" );
+
+
+ 	svg.append("g")
+    	.attr("class", "y axis")
+    	.call(yAxis);
+
+	svg.selectAll("rectangle")
+		.data(data)
+		.enter()
+		.append("rect")
+		.attr("class","rectangle")
+		.attr("width", x.rangeBand()-10)
+		.attr("height", function(d){
+			return height - y(+d[selection]);
+		})	
+		.attr("x", function(d, i){
+			return (width / data.length) * i ;
+		})
+		.attr("y", function(d){
+			return y(+d[selection]);
+		})
+		.append("title")
+		.text(function(d){
+			return d.Year + " : " + d[selection];
+		});
+
+	var selector = d3.select("#drop")
+    	.append("select")
+    	.attr("id","dropdown")
+    	.on("change", function(d){
+        	selection = document.getElementById("dropdown");
+
+        	y.domain([0, d3.max(data, function(d){
+				return +d[selection.value];})]);
+
+        	yAxis.scale(y);
+
+        	d3.selectAll(".rectangle")
+           		.transition()
+	            .attr("height", function(d){
+					return height - y(+d[selection.value]);
+				})
+				.attr("x", function(d, i){
+					return (width / data.length) * i ;
+				})
+				.attr("y", function(d){
+					return y(+d[selection.value]);
+				})
+           		.ease("linear")
+           		.select("title")
+           		.text(function(d){
+           			return d.Year + " : " + d[selection.value];
+           		});
+      
+           	d3.selectAll("g.y.axis")
+           		.transition()
+           		.call(yAxis);
+
+         });
+    
+     svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 120 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("MtCo2-e"); 
+      
+     
+
+  // text label for the x axis
+     svg.append("text")
+            .attr("text-anchor", "middle")  
+            .attr("transform", "translate("+ (width/2) +","+(height+40)+")")  // centre below axis
+            .text("Date");
+                 
+      
+     selector.selectAll("option")
+      .data(elements) 
+      .enter().append("option")
+      .attr("value", function(d){
+        return d;
+      })
+      .text(function(d){
+        return d;
+      })
+      
+
+
+	}, function (error) {
+   	console.log("Error: " + error.code);
+	})
+
+
+</script>
+<script>
+new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025],
+    datasets: [{ 
+        data: [74.2,74.1,75.6,77.4,80.4,81.7,82.3,84.9,86.8,86.6,88,90.7,92.4,92.8,92.5,92.7],
+        label: "Actual",
+        borderColor: "#3e95cd",
+        fill: false
+     },
+     {data:[,,,,,,,,,,,,,,,,95.35,96.2,97.98,98.93,100.62,101.47,103.25,104.1,105.89,106.74],
+            label: "Predict",
+        	borderColor: "#8e5ea2",
+        	fill: false}
+    ]},
+   
+options: {
+	responsive:true,
+    maintainAspectRatio: false,
+    title: {
+      display: true,
+      text: 'Prediction of CO2 emissions by transport in Australia'
+    },
+    legend: {
+            display: true,
+            position:"right"
+        },
+    scales: {
+            yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Transport  MtCO2-e'
+          }
+        }],
+         xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Year'
+          }
+        }]
+        }
+    }
+}); </script>
+<script>
+new Chart(document.getElementById("pie-chart"), {
+    type: 'pie',
+    data: {
+      labels: ["Electricity", "Stationary energy excluding electricity", "Transport", "Fugitive emissions", "Industrial processes and product use","Agriculture","Waste","LULUCF"],
+      datasets: [{
+        label: "Population (millions)",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#bccd3e","#FFCC33","#6666CC"],
+        data: [186.1,94.4,92.7,37.9,31.9,81.2,12.7,12.3]
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: 'Source of CO2 emission in Australia in 2015'
+      }
+    }
+});
+   
+ </script>
   </body>
 
 </html>

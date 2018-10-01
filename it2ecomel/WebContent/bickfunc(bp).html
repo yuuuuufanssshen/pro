@@ -8,7 +8,7 @@
     <meta name="author" content="">
 
     <title>Eco-Melbourne</title>
-    <link rel="icon" href="img/logo.ico" />
+
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -103,7 +103,7 @@
             
             <li class="nav-item">
               
-              <a class="nav-link js-scroll-trigger" href="bickfunc.html">Eco-Journey Planner</a>
+              <a class="nav-link js-scroll-trigger" href="bikeintro.html">Eco-Journey Planner</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="data.html">Statistics</a>
@@ -116,40 +116,26 @@
       </div>
     </nav>
 
-    <header class="masthead text-center text-white d-flex" id="sm-layer">
-      <div class="layer"> 
-    <div class="container my-auto" >
-      <div class="row" style="padding-bottom: 0;">
-        <div class="col-lg-14 mx-auto">
-    
-          <h1 class="text">Eco-Journey Planner</h1>
-          <hr>
-          <p>Find bike sharing stations, drinking water fountain, public toilet and bike parking spots on the route to your destination.</p>
-        </div>
+     <header class="header3">
+      <div class="container my-auto">    
       </div>
-    </div>
-  </div>
-  </header>
-    
+    </header>
     <div class="container" style="height: fit-content;">
     <div class="row" id="row">
        
   <div class="col-4" id="weather" >
   	<h3 style="text-align: center;">Today's Weather</h3>
-  	<p style="text-align: center;margin-bottom: 0;" id="tmp"></p>
-  	<div style="text-align: center;">
-  	<img  id="tianqi"></img>
-  	</div>
+  	<p style="text-align: center;margin-bottom: 0;"><label id="tianqi"></label></p>
   	   <div class="row" id="row">
     <div class="col-sm">
       <h3 id="h1" style="font-family: Roboto;"></h3>
       <p id="3h" style="font-family: Roboto;"></p>
-       <img id="tianqi1" style="font-family: Roboto;"></img>
+       <p id="tianqi1" style="font-family: Roboto;"></p>
     </div>
     <div class="col-sm">
       <h3 id="h2" style="font-family: Roboto;"></h3>
       <p id="6h" style="font-family: Roboto;"></p>
-             <img id="tianqi2" style="font-family: Roboto;"></img>
+             <p id="tianqi2" style="font-family: Roboto;"></p>
     </div>
     <!--<div class="col-sm">
       <h3 id="h3" style="font-family: Roboto;"></h3>
@@ -216,7 +202,7 @@
   	</p>
   </div>
   <div class="col">
-      <h4>Drinking Water Fountain</h4><hr>
+      <h4>Water Fountain</h4><hr>
       <p><label id="address4"></label></p>
       <p>Distance: <label id="distance4"></label></p>
   	
@@ -652,9 +638,6 @@ $.getJSON(queryURL, function (data) {
 var timer = 24; 
 var d1 = new Date(); 
 var d2 = new Date();
-var clear = "img/sunny.png";
-var cloud = "img/clouds.png";
-var rain = "img/rainning.png";
 d1.setHours(+d2.getHours()+(timer/8) ); 
 var hour = d1.getHours();
 $('#h1').append(hour + " : " + "00");
@@ -662,50 +645,38 @@ d1.setHours(+d2.getHours()+(timer/4) );
 var hour2 = d1.getHours();
 $('#h2').append(hour2 + " : " + "00");
 d1.setHours(+d2.getHours()+(timer*3/8) ); 
-
+var hour2 = d1.getHours();
+$('#h3').append(hour2 + " : " + "00");
 
   var results = data.list[0];
-  var desc =  results.weather[0].main;
+  var desc =  results.weather[0].description;
 
 
   var curdesc = results.main.temp;
   var result1 = data.list[5];
-  var desc1 =  result1.weather[0].main;
+  var desc1 =  result1.weather[0].description;
 
 
 
   var curdesc1 = result1.main.temp;
   var result2 = data.list[6];
-  var desc2 =  result2.weather[0].main;
+  var desc2 =  result2.weather[0].description;
   var curdesc2 = result2.main.temp;
   
+  var result3= data.list[7];
+  var curdesc3 = result3.main.temp;
+  var desc3 =  result3.weather[0].description;
 
   
-  $('#tmp').append("Now: " + curdesc + " ℃");
+  $('#tianqi').append("Now: " + curdesc + " ℃");
   $('#3h').append( curdesc1 + " ℃");
   $('#6h').append( curdesc2 + " ℃");
-  if (desc == "Clear"){
-  	 $('#tianqi').attr("src",clear);
-  }else if (desc == "Clouds"){
-  	$('#tianqi').attr("src",cloud);
-  }else{
-  	$('#tianqi').attr("src",rain);
-  }
-   if (desc1 == "Clear"){
-  	 $('#tianqi1').attr("src",clear);
-  }else if (desc1 == "Clouds"){
-  	$('#tianqi1').attr("src",cloud);
-  }else{
-  	$('#tianqi1').attr("src",rain);
-  }
-  if (desc2 == "Clear"){
-  	 $('#tianqi2').attr("src",clear);
-  }else if (desc2 == "Clouds"){
-  	$('#tianqi2').attr("src",cloud);
-  }else{
-  	$('#tianqi2').attr("src",rain);
-  }
-
+  $('#9h').append( curdesc3 + " ℃");
+  
+    $('#tianqi').append(", " + desc);
+  $('#tianqi1').append(desc1);
+  $('#tianqi2').append( desc2);
+  $('#tianqi3').append( desc3);
 
 })
 

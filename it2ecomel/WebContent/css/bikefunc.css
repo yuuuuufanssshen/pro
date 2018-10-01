@@ -90,3 +90,17 @@ label h4{
  .col label{
      font-weight: bold;
  }
+
+ @media (min-width: 992px){
+    #sm-layer {
+        height: 0vh;
+        min-height: 350px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    }
+
+    header.masthead hr {
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }

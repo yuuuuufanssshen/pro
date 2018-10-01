@@ -7,7 +7,8 @@
     <meta name="author" content="">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <title>Eco-Melbourne</title>
-
+    <link rel="icon" href="img/logo.ico" />
+	
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/calculator.css" rel="stylesheet">
@@ -28,7 +29,6 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <link href="css/index.css" rel="stylesheet">
 
-		<title></title>
 	</head>
 
 	<body>
@@ -55,7 +55,7 @@
             
             <li class="nav-item">
               
-              <a class="nav-link js-scroll-trigger" href="bikeintro.html">Eco-Journey Planner</a>
+              <a class="nav-link js-scroll-trigger" href="bickfunc.html">Eco-Journey Planner</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link js-scroll-trigger" href="data.html">Statistics</a>
@@ -69,12 +69,12 @@
     </nav>
 
 
-    <header class="masthead text-center text-white d-flex">
+    <header class="masthead text-center text-white d-flex" id="sm-layer">
         <div class="layer"> 
       <div class="container my-auto" >
         <div class="row">
-          <div class="col-lg-10 mx-auto">
-		  <hr>
+          <div class="col-lg-14 mx-auto">
+		  
             <h1 class="text">  Footprint Calculator</h1>
             <hr>
           </div>
@@ -192,7 +192,7 @@
 				Cars produce the most CO2 emissions in Transportation sector. <br>
 				Reduce your Carbon Footprint and plan your bicycle journey NOW! </p><br><br>
     <button type="button" class="edit-previous">Calculate again</button>
-    <a class="gobike" href="bikeintro.html">Plan my journey</a>
+    <a class="gobike" href="bickfunc.html">Plan my journey</a>
     </div>
 </div>
 <div class="newfooter">
@@ -408,7 +408,7 @@ var yAxis = d3.svg.axis()
 
 var svg = d3.select("#graphic").append("svg")
  	.attr("preserveAspectRatio", "xMidYMid meet")
-    .attr("viewBox", "1 -25 850 360")
+    .attr("viewBox", "-140 -100 850 360")
     .append("g")
     .attr("transform", 
           "translate(" + margin.left + "," + margin.top + ")");
@@ -467,17 +467,17 @@ var svg = d3.select("#graphic").append("svg")
       .call(yAxis)
       .append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", -27)
+      .attr("y", -41)
       .attr("dy", ".11em")
       .style("text-anchor", "end")
-      .text("gram")
-      .style("font-size", "15px");  
+      .text("Carbon dioxide emission gram")
+      .style("font-size", "12px");  
       
    bars.append("text")
             .attr("class", "label")
             //y position of the label is halfway down the bar
             .attr("x", function (d) {
-                return x(d.name)+48 ;
+                return x(d.name)+16.5 ;
             })
             //x position is 3 pixels to the right of the bar
             .attr("y", function (d) {
@@ -492,11 +492,11 @@ var svg = d3.select("#graphic").append("svg")
    bars.append("svg:image")
     			.attr("class", "svg-image")
     			.attr("x", function (d) {
-                return x(d.name) + x.rangeBand() / 2 -50;
+                return x(d.name) + x.rangeBand() / 2 -42;
             })
             //x position is 3 pixels to the right of the bar
             .attr("y", function (d) {
-                return y(d.value) -50;
+                return y(d.value) -80;
             })
     			.attr("height", "50px")
     			.attr("width", "50px")

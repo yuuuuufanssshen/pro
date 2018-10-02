@@ -14,10 +14,12 @@
 }
 .next
 {
-	border: none;
-	background-color: #f05f40;
-	color: #FFFFFF;
-	padding: 15px 32px;
+  border: none;
+  background-color: #f05f40;
+  color: #FFFFFF;
+  padding: 15px 32px;
+  border-radius: 3px;
+  font-size: 18px;
 
 }
 .back{
@@ -71,11 +73,12 @@
       #destination-input {
         background-color: #fff;
         font-family: Roboto;
-        font-size: 15px;
+        font-size: 18px;
         font-weight: 300;
         margin-left: 2%;
         text-overflow: ellipsis;
-        width: 60%;
+        width: 100%;
+        border: 1.4px solid orange;
       }
 
       #origin-input:focus,
@@ -104,7 +107,7 @@
 	text-align: center;
 }
 .resultbox img{
-	width: 35%;
+
 	height: 100%;
 }
 .edit-previous{
@@ -120,10 +123,15 @@
 		border: none;
 	background-color: #f05f40;
 	color: #FFFFFF;
-	padding: 15px 32px;
+  padding: 15px 32px;
+  font-size: 18px;
+  border-radius: 3px;
 }
 .gobike:hover{
-	    background-color: #FFC107; 
+  background-color: #EE4B28;
+  cursor: pointer;
+  color: #FFFFFF;
+  text-decoration: none;
 }
 
 
@@ -136,3 +144,77 @@
     padding-bottom: 0;
 }
 }
+
+.calculate{
+padding: 10px 0px 20px 0px;
+}
+
+#card{
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+#impact{
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+ /* WebKit and Opera browsers */
+ @-webkit-keyframes spinner {
+  from { -webkit-transform: rotateY(0deg);    }
+  to   { -webkit-transform: rotateY(-360deg); }
+}
+
+/* all other browsers */
+@keyframes spinner {
+  from {
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+  }
+  to {
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+  }
+}
+
+#stage {
+  margin: 1em auto;
+  -webkit-perspective: 1200px;
+  -moz-perspective: 1200px;
+  -ms-perspective: 1200px;
+  perspective: 1200px;
+}
+
+#spinner {
+  -webkit-animation-name: spinner;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 6s;
+
+  animation-name: spinner;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 6s;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+#spinner:hover {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+html [type=button] {
+  border-radius: 3px;
+  font-size: 18px;
+}
+
+html [type=button]:hover {
+  background-color: #EE4B28;
+  cursor: pointer;
+}
+
+

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			#container {
+    height: 500px; 
+    min-width: 310px; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    color: "#ff0000";
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: "#ff0000";
+}
+</style>
+		<title></title>
+	</head>
+	<body>
+	<div id="container"></div>
+	<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/au/au-all.js"></script>
+
+	<script>
+	var data = [
+    	['au-nt', 8396.75],
+    	['au-wa', 69051.83],
+    	['au-sa', 17526.78],
+    	['au-ql', 108885.21],
+    	['au-ts', 2404.44],   	
+    	['au-ns', 88601.16],
+    	['au-vi', 91506.52]
+						];
+
+// Create the chart
+Highcharts.mapChart('container', {
+    chart: {
+        map: 'countries/au/au-all'
+    },
+
+    title: {
+        text: 'Green house emissions from different states of Australia'
+    },
+
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    colorAxis: {
+        min: 0
+    },
+
+    series: [{
+        data: data,
+        name: 'Mt co2-e',
+        states: {
+            hover: {
+                color: '#BADA55'
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+        }
+    }]
+});
+
+	</script>
+	</body>
+</html>

@@ -23,7 +23,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/creative.min.css" rel="stylesheet">
-<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v3.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -77,7 +77,7 @@
             
                   <h1 class="text">Carbon Footprint Calculator</h1>
                   <hr>
-                  <h4>Measure the amount of carbon dioxide you are producing when you travel and determine how best to reduce your impact.
+                  <h4>Check the amount of carbon dioxide you are producing when you travel and determine ways to reduce it.
                   </h4>
                 </div>
               </div>
@@ -94,7 +94,7 @@
             <div class="col-sm-4">
                 <div class="item" data-aos="fade-right">
                     <div class="imgcontainer">
-                        <img src="img/cal.png">
+                        <img src="img/calfoot.png">
                         </div>
               </div>
             </div>
@@ -102,7 +102,7 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);"> 
           <div class="col-lg-10 mx-auto">
             <h2 style="text-align: center;margin-top: 5%;font-size: 40px;">
-              Where are you going today?
+              Where are you travelling today?
               <hr>
             </h2>
             <br>
@@ -163,10 +163,10 @@
     	   
  <h2 style="font-family: Roboto;text-align: center;">CO<sub>2</sub> emissions for your travel</h2>
     <hr  />
-    <div class="row" style="padding-top: 20px;">
-    <div class="col-sm-4" id="card"> <button type="button" class="edit-previous">Calculate again</button></div>
+    <div class="row" >
+    <!-- <div class="col-sm-4" id="card"> <button type="button" class="edit-previous">Calculate again</button></div> -->
     
- <div class="col-sm-8">
+ <div class="col-sm-12">
    
     <div 	id="graphic" style="width: 100%;"></div>
   
@@ -175,7 +175,7 @@
 </div>
 </div>
  
-<h2 style="font-family: Roboto;text-align: center;">Impact of CO<sub>2</sub> emissions from your travel</h2>
+<h2 style="font-family: Roboto;text-align: center;font-weight: bold;">Impact of CO<sub>2</sub> emissions from your travel</h2>
 	<hr  />
     <div class="row" style="padding-top: 20px;">
     <div class="col">	
@@ -186,27 +186,30 @@
  	</div>
  	</div>
  	<div class="col" id="impact">
- 	<h4>You have travelled <label id="distence"></label> km</h4>
- 	<h4>Travel by car:</h4>
- 	<p>it will take ONE TREE <label id="result3"style="color: #B21F2D;"></label> to absorb these CO<sub>2</sub> produced.</p>
- 	<h4>Travel by bus:</h4>
- 	<p>it will take ONE TREE <label id="result4"style="color: #B21F2D;"></label> to absorb these CO<sub>2</sub> produced.</p>
+ 	<h3>Travel Distance: <label id="distence"></label> km</h3>
+ 	<h3>Travel by car:</h3>
+ 	<h4>A tree will take  <label id="result3"style="color: #910e0e;font-size: 1.8rem;font-weight:bold;"></label> to absorb the CO<sub>2</sub> produced.</h4>
+ 	<h3>Travel by bus:</h3>
+ 	<h4>A tree will take <label id="result4"style="color: #910e0e;font-size: 1.8rem;font-weight:bold;"></label> to absorb the CO<sub>2</sub> produced.</h4>
    <button type="button" class="edit-previous">Calculate again</button> 
 </div>
 
  </div>
- <h2 style="font-family: Roboto;text-align: center;">Eco-Journey Planner</h2>
+ <h2 style="font-family: Roboto;text-align: center;font-weight: bold;">Eco-Journey Planner</h2>
 	<hr  />
     <div class="row" style="padding-top: 20px;">
     
  	<div class="col" id="impact">
-   <h3>Travel the eco-friendly way. <br> </h3>
-   <p>Find bike sharing stations, drinking water fountain, public toilet and bike parking spots on the route to your destination.</p>
+     <h4>Riding a bike or walking produces zero CO<sub>2</sub>.</h4><br>
+     <h4>Find bike sharing stations, drinking water fountain, public toilet and bike parking spots on the route to your destination.</h4>
+<br>
+   <h3>Travel the eco-friendly way. <br> </h3><br>
+  
    <a class="gobike" href="bickfunc.html">Plan my journey</a>  
   </div>
  <div class="col">	
     <div class="imgcontainer" id="stage">
-        <img src="img/tablet.png" id="spinner">
+      <a href="bickfunc.html"><img src="img/tablet.png" id="spinner"></a>
         </div> 
 </div>
  
@@ -461,22 +464,22 @@ var svg = d3.select("#graphic").append("svg")
           "translate(" + margin.left + "," + margin.top + ")");
           
              var data = [{
-                "name": "car",
+                "name": "Car",
                 "value": (0|car),
                 "ixx": "./img/car.png"
         ,},
             {
-                "name": "bus",
+                "name": "Bus",
                 "value": (0|busemission),
                 "ixx": "./img/bus.png"
         ,},
             {
-                "name": "bicycle",
+                "name": "Bicycle",
                 "value": 0,
                 "ixx": "./img/bike-2.png"
         ,},
             {
-                "name": "walk",
+                "name": "Walk",
                 "value": 0,
                 "ixx": "./img/pedestrian-walking.png"
         ,}];
@@ -507,7 +510,7 @@ var svg = d3.select("#graphic").append("svg")
       .attr("dx", "-1.3em")
       .attr("dy", "1.21em")
       .attr("transform", "rotate(0)" )
-      .style("font-size", "15px");
+      .style("font-size", "20px");
 
   bars.append("g")
       .attr("class", "y axis")
@@ -517,8 +520,8 @@ var svg = d3.select("#graphic").append("svg")
       .attr("y", -41)
       .attr("dy", ".11em")
       .style("text-anchor", "end")
-      .text("Carbon dioxide emission gram")
-      .style("font-size", "12px");  
+      .text("Carbon dioxide (grams)")
+      .style("font-size", "17px");  
       
    bars.append("text")
             .attr("class", "label")

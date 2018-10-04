@@ -8,7 +8,7 @@ body{
  }
 
  section {
-    padding: 8rem 0rem 4rem 0rem !important;
+    padding: 8rem 0rem 0rem 0rem !important;
 }
 
 .newfooter p{
@@ -152,9 +152,10 @@ header.masthead h1 {
   shape-rendering: crispEdges;
 }
 .chart-container {
-            width: 70%;
-            height:350px;
-            margin-top:10%;
+    width: 70%;
+    height: 350px;
+    /* margin-top: 3%; */
+    margin: 0 auto;
 }
 .chart2-container {
             width: 50%;

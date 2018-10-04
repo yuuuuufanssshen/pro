@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>Eco-Melbourne</title>
-
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -26,11 +26,43 @@
 	<link href="css/index.css" rel="stylesheet">
 	<link rel="icon" href="img/logo.ico" />
   </head>
+		<style>
+			#chart1container {
+    height: 500px; 
+    min-width: 310px; 
+    max-width: 800px; 
+    margin: 0 auto; 
+    
+}
+.loading {
+    margin-top: 10em;
+    text-align: center;
+    color: "#ff0000";
+}
 
+@media (min-width: 992px){
+    #sm-layer {
+        height: 0vh;
+        min-height: 350px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    }
+
+      header.masthead hr {
+        margin-top: 15px !important;
+        margin-bottom: 15px !important;
+    }
+
+    .row h2{
+       font-weight: bold;
+    }
+</style>
   <body id="page-top">
 
     <!-- Navigation -->
   <!-- Navigation -->
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Eco Melbourne</a>
@@ -63,37 +95,54 @@
     </nav>
 
 
-    <header class="header3">
-      <div class="container my-auto">
-       
+    <header class="masthead text-center text-white d-flex" id="sm-layer">
+        <div class="layer"> 
+      <div class="container my-auto" >
+        <div class="row" style="padding-bottom: 0;">
+          <div class="col-lg-14 mx-auto">
+      
+            <h1 class="text">Statistics</h1>
+            <hr>
+           <!-- <p>Find bike sharing stations, drinking water fountain, public toilet 
+               and bike parking spots on the route to your destination.</p> -->
+          </div>
+        </div>
       </div>
+    </div>
     </header>
-<section>
+<section style="padding: 3% 0% 0% 0% !important;">
 				<div class="container">
-                    <div class="row">
+                    <div class="row"  style="display: block;">
    
-                            <div class="col-sm-6" id="layer">
-                              	<div class='tableauPlaceholder' id='viz1538310454387' style='position: relative'><noscript><a href=' '>< img alt='Dashboard 1 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Bo&#47;Book123_171&#47;Dashboard1&#47;1_rss.png' style='border: none' /></a ></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='views&#47;Book123_171&#47;Dashboard1?:embed=y&amp;:display_count=y&amp;publish=yes' /> <param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;&#47;&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1538310454387');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='800px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-                              </div>
-                           <div class="col-sm-6">
-                               
-                                </div>
-                                </div>
+                            		<h2 style=" width: 100%; text-align:center;">State-wise green house gas emissions in Australia in 2018</h2><hr>
+
+<div id="chart1container" style=" width: 100%;"></div>
+                    </div>
 
 <br>
-<div class="chart2-container">
-    <canvas id="pie-chart" width="30%" height="25%"></canvas>
+<div class="row" style="display: block;">
+	<h2 style=" width: 100%; text-align:center;">Sources of CO<sub>2</sub> emissions in Australia in 2015</h2><hr>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
-	<div id="drop" align="center"></div>
+<div class="row" style="display: block;">
+	<h2 style=" width: 100%; text-align:center;">Sources of  CO<sub>2</sub> emissions in Australia from 2000 to 2015</h2><hr><br/>
+	<div id="drop" style="text-align:center"></div>
 
-	<div id="graphic1"></div>
+	<div id="graphic1" style="text-align:center"></div>
+	</div>
+	<div class="row" style="display: block;">
+			<h2 style=" width: 100%; text-align:center;">Prediction of  CO<sub>2</sub> emissions of Transport sector in Australia</h2><hr>
+
 	<div class="chart-container">
+		
     <canvas id="line-chart"></canvas>
+    </div>
+     </div>
 </div>
   </div>
 	
 </section>
-  <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
@@ -288,7 +337,7 @@ new Chart(document.getElementById("line-chart"), {
         fill: false
      },
      {data:[,,,,,,,,,,,,,,,,95.35,96.2,97.98,98.93,100.62,101.47,103.25,104.1,105.89,106.74],
-            label: "Predict",
+            label: "Predicted",
         	borderColor: "#8e5ea2",
         	fill: false}
     ]},
@@ -296,10 +345,7 @@ new Chart(document.getElementById("line-chart"), {
 options: {
 	responsive:true,
     maintainAspectRatio: false,
-    title: {
-      display: true,
-      text: 'Prediction of CO2 emissions by transport in Australia'
-    },
+    
     legend: {
             display: true,
             position:"right"
@@ -321,23 +367,37 @@ options: {
     }
 }); </script>
 <script>
-new Chart(document.getElementById("pie-chart"), {
-    type: 'doughnut',
-    data: {
-      labels: ["Electricity", "Stationary energy excluding electricity", "Transport", "Fugitive emissions", "Industrial processes and product use","Agriculture","Waste","Land use and forestry"],
-      datasets: [{
-        label: "Population (millions)",
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850","#bccd3e","#FFCC33","#6666CC"],
-        data: [186.1,94.4,92.7,37.9,31.9,81.2,12.7,12.3]
-      }]
-    },
-    options: {
-      title: {
-        display: true,
-        text: 'Source of CO2 emission in Australia in 2015'
-      }
-    }
+window.onload = function() {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	theme: "light2", // "light1", "light2", "dark1", "dark2"
+	exportEnabled: true,
+	animationEnabled: true,
+	
+	
+	data: [{
+		type: "pie",
+		startAngle: 25,
+		toolTipContent: "<b>{label}</b>: {y} (Mt co2-e)",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - {y}(Mt co2-e)",
+		dataPoints: [
+			{ y: 186.1, label: "Electricity" },
+			{ y: 94.4, label: "Stationary energy excluding electricity" },
+			{ y: 92.7, label: "Transport" },
+			{ y: 37.9, label: "Fugitive emissions" },
+			{ y: 31.9, label: "Industrial processes and product use" },
+			{ y: 81.2, label: "Agriculture" },
+			{ y: 12.7, label: "Waste" },
+			{ y: 12.3, label: "Land use and forestry" }
+		]
+	}]
 });
+chart.render();
+
+}
    
  </script>
  
@@ -346,6 +406,56 @@ new Chart(document.getElementById("pie-chart"), {
         duration: 1200,
       })
       </script>
+      <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/mapdata/countries/au/au-all.js"></script>
+
+	<script>
+	var data = [
+    	['au-nt', 8396.75],
+    	['au-wa', 69051.83],
+    	['au-sa', 17526.78],
+    	['au-ql', 108885.21],
+    	['au-ts', 2404.44],   	
+    	['au-ns', 88601.16],
+    	['au-vi', 91506.52]
+						];
+
+// Create the chart
+Highcharts.mapChart('chart1container', {
+    chart: {
+        map: 'countries/au/au-all'
+    },
+
+
+
+    mapNavigation: {
+        enabled: true,
+        buttonOptions: {
+            verticalAlign: 'bottom'
+        }
+    },
+
+    colorAxis: {
+        min: 0
+    },
+
+    series: [{
+        data: data,
+        name: 'Mt co2-e',
+        states: {
+            hover: {
+                color: '#BADA55'
+            }
+        },
+        dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+        }
+    }]
+});
+
+	</script>
   </body>
 
 </html>

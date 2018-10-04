@@ -85,7 +85,7 @@ label h4{
  .col{
     margin: 0% 2%;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-
+    text-align: center;
  }
 
  .col label{
@@ -105,3 +105,17 @@ label h4{
         margin-top: 15px !important;
         margin-bottom: 15px !important;
     }
+.next
+{
+  border: none;
+  background-color: #f05f40;
+  color: #FFFFFF;
+  padding: 15px 30px;
+  border-radius: 3px;
+  font-size: 18px;
+
+}
+    .next:hover {
+    background-color: #EE4B28; 
+	cursor: pointer;
+}

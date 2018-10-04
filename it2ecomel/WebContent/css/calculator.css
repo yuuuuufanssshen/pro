@@ -123,8 +123,8 @@
 		border: none;
 	background-color: #f05f40;
 	color: #FFFFFF;
-  padding: 15px 32px;
-  font-size: 18px;
+  padding: 15px 30px;
+  font-size: 22px;
   border-radius: 3px;
 }
 .gobike:hover{
@@ -154,6 +154,8 @@ padding: 10px 0px 20px 0px;
 }
 #impact{
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  padding: 20px 15px;
+  text-align: center;
 }
 
 
@@ -209,7 +211,7 @@ padding: 10px 0px 20px 0px;
 
 html [type=button] {
   border-radius: 3px;
-  font-size: 18px;
+  font-size: 22px;
 }
 
 html [type=button]:hover {
@@ -217,4 +219,6 @@ html [type=button]:hover {
   cursor: pointer;
 }
 
-
+.row h2{
+  font-weight: bold;
+}

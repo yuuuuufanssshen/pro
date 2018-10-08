@@ -27,6 +27,13 @@
 	<link rel="icon" href="img/logo.ico" />
   </head>
 		<style>
+			.chart2container {
+            width: 20%;
+            height:30%;
+            margin-top:10%;
+            margin-left: 30%;
+}
+
 			#chart1container {
     height: 500px; 
     min-width: 310px; 
@@ -103,8 +110,7 @@
       
             <h1 class="text">Statistics</h1>
             <hr>
-           <!-- <p>Find bike sharing stations, drinking water fountain, public toilet 
-               and bike parking spots on the route to your destination.</p> -->
+           <p>Know more about the CO<sub>2</sub> emissions from the various states and sectors in Australia.</p> 
           </div>
         </div>
       </div>
@@ -120,16 +126,15 @@
                     </div>
 
 <br>
+<!-- <div class="row" style="display: block;">
+	<h2 style=" width: 100%; text-align:center;">change the title</h2><hr>
+<div id="chart2container" style="height: 370px; width: 35%;margin-left: 35%;"><canvas id="doughnut-chart" width="30%"></canvas></div>
+</div> -->
 <div class="row" style="display: block;">
 	<h2 style=" width: 100%; text-align:center;">Sources of CO<sub>2</sub> emissions in Australia in 2015</h2><hr>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 </div>
-<div class="row" style="display: block;">
-	<h2 style=" width: 100%; text-align:center;">Sources of  CO<sub>2</sub> emissions in Australia from 2000 to 2015</h2><hr><br/>
-	<div id="drop" style="text-align:center"></div>
 
-	<div id="graphic1" style="text-align:center"></div>
-	</div>
 	<div class="row" style="display: block;">
 			<h2 style=" width: 100%; text-align:center;">Prediction of  CO<sub>2</sub> emissions of Transport sector in Australia</h2><hr>
 
@@ -138,6 +143,12 @@
     <canvas id="line-chart"></canvas>
     </div>
      </div>
+     <div class="row" style="display: block;">
+        <h2 style=" width: 100%; text-align:center;">Sources of  CO<sub>2</sub> emissions in Australia from 2000 to 2015</h2><hr><br/>
+        <div id="drop" style="text-align:center"></div>
+    
+        <div id="graphic1" style="text-align:center"></div>
+        </div>
 </div>
   </div>
 	
@@ -426,9 +437,9 @@ Highcharts.mapChart('chart1container', {
     chart: {
         map: 'countries/au/au-all'
     },
-
-
-
+title: {
+        text: ' '
+    },
     mapNavigation: {
         enabled: true,
         buttonOptions: {
@@ -456,6 +467,31 @@ Highcharts.mapChart('chart1container', {
 });
 
 	</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	<body>
+<script>
+new Chart(document.getElementById("doughnut-chart"), {
+    type: 'doughnut',
+    data: {
+      labels: ["Carbon dioxide","Methane","Nitrous oxide"],
+      datasets: [{
+        backgroundColor: ["#bccd3e","#FFCC33","#6666CC"],
+        data: [100.01,99.95,100] 
+      }]
+    },
+    options: {
+      title: {
+        display: true,
+        text: ''
+        
+      }
+    }
+});
+
+
+
+   
+ </script>
   </body>
 
 </html>

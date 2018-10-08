@@ -253,8 +253,14 @@
 <script>$('body').on('click', '.next', function() { 
     var id = $('.content:visible').data('id');
     var nextId = $('.content:visible').data('id')+1;
-    $('[data-id="'+id+'"]').hide();
+    
+    if (id == 1 && ($('#destination-input').val() == '' || $('#origin-input').val() == '') ){
+      alert('Please enter an origin and destination location.');
+   
+    }else{
+    	$('[data-id="'+id+'"]').hide();
     $('[data-id="'+nextId+'"]').show();
+    }
     
     if($('.back:hidden').length == 1){
         $('.back').show();
@@ -399,6 +405,7 @@ $('body').on('click', '.edit-previous', function() {
 
       AutocompleteDirectionsHandler.prototype.route = function() {
         if (!this.originPlaceId || !this.destinationPlaceId) {
+        	
           return;
         }
         var me = this;

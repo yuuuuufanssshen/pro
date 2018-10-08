@@ -86,6 +86,7 @@ header.masthead p {
 
 * {
     box-sizing: border-box;
+    border-radius: 3px;
   }
   
   .item {

@@ -128,7 +128,7 @@
     
           <h1 class="text">Eco-Journey Planner</h1>
           <hr>
-          <p>Find bike sharing stations, drinking water fountain, public toilet and bike parking spots on the route to your destination.</p>
+          <p>Find bike sharing stations, drinking water fountains, public toilets and bike parking spots on the route to your destination.</p>
         </div>
       </div>
     </div>
@@ -226,7 +226,6 @@
   <div class="col">
   	<h4>Bike Sharing Station</h4><hr>
   	<p ><label id="address1"></label></p>
-  	<input type="button" class="next" id="shbk" value="Show on map" />
   	<br />
   	<p>Distance: <label id="distance1"></label>
   	</p>
@@ -234,7 +233,6 @@
   <div class="col">
       <h4>Drinking Water Fountain</h4><hr>
       <p><label id="address4"></label></p>
-      <input type="button" class="next" id="shwf" value="Show on map" />
       <br />
       <p>Distance: <label id="distance4"></label></p>
   	
@@ -245,14 +243,12 @@
   <div class="col">
   	<h4>Public Toilet</h4><hr>
   	<p><label id="address3"></label></p>
-    <input type="button" class="next" id="shtl" value="Show on map" />
   	<br />
   	<p>Distance: <label id="distance3"></label></p>
   </div>
   <div class="col">
       <h4>Bike Parking</h4><hr>
       <p><label id="address2"></label></p>
-            <input type="button" class="next" id="shbp" value="Show on map" />
 <br />
       <p>Distance: <label id="distance2"></label></p>
   
@@ -282,6 +278,10 @@
       var distence2 = [];
       var distence3 = [];
       var distence4 = [];
+      var location1 = [];
+      var location2 = [];
+      var location3 = [];
+      var location4 = [];
       var directionsService2;
       var directionsDisplay2;
       function initMap() {
@@ -315,7 +315,7 @@
         }); 
         		infoWindow.open(map);
             map.setCenter(pos);
-                       	directionsDisplay2.setMap(map);
+            directionsDisplay2.setMap(map);
 
         var p1 = new google.maps.LatLng(start.lat, start.lng);  	
 		var marker, i;
@@ -341,7 +341,7 @@ marker = new google.maps.Marker({
         icon: "img/bicycle-2.png",
         map: map    
     });
-     bikeMarkers.push(marker);
+    bikeMarkers.push(marker);
     marker.setVisible(false);
     showDirection(marker,directionsService2,directionsDisplay2);
 }		
@@ -355,14 +355,12 @@ marker = new google.maps.Marker({
        		  map: map    
    			});
    			newMarker.setVisible(false);
-			document.getElementById("shbk").addEventListener('click',function(){
+			document.getElementById("address1").addEventListener('click',function(){
 				 if (!newMarker.getVisible()) {
 			   newMarker.setVisible(true);
-			   document.getElementById("shbk").value = "Hide";
 			   map.setCenter(address1);
         	  } else {
             newMarker.setVisible(false);
-            			   document.getElementById("shbk").value = "Show on map";
 
       	  }			})
 			
@@ -409,14 +407,12 @@ var address2 = new google.maps.LatLng(distence2[0][1], distence2[0][2])
        		  map: map    
    			});
    			newMarker.setVisible(false);
-			document.getElementById("shwf").addEventListener('click',function(){
+			document.getElementById("address4").addEventListener('click',function(){
 				 if (!newMarker.getVisible()) {
 			   newMarker.setVisible(true);
-			   document.getElementById("shwf").value = "Hide";
 			   map.setCenter(address2);
         	  } else {
             newMarker.setVisible(false);
-            			   document.getElementById("shwf").value = "Show on map";
 
       	  }			})
             } else {
@@ -462,15 +458,12 @@ var address3 = new google.maps.LatLng(distence3[0][1], distence3[0][2])
        		  map: map    
    			});   
    			newMarker.setVisible(false);
-			document.getElementById("shtl").addEventListener('click',function(){
+			document.getElementById("address3").addEventListener('click',function(){
 				 if (!newMarker.getVisible()) {
 			   newMarker.setVisible(true);
-			   document.getElementById("shtl").value = "Hide";
 			   map.setCenter(address3);
         	  } else {
             newMarker.setVisible(false);
-            			   document.getElementById("shtl").value = "Show on map";
-
       	  }			})
             } else {
               window.alert('No results found');
@@ -514,14 +507,13 @@ var address4 = new google.maps.LatLng(distence4[0][1], distence4[0][2])
       		  position: address4,
        		  map: map    
    			});   
-   			newMarker.setVisible(false);			document.getElementById("shbp").addEventListener('click',function(){
+   			newMarker.setVisible(false);		
+   			document.getElementById("address2").addEventListener('click',function(){
 				 if (!newMarker.getVisible()) {
 			   newMarker.setVisible(true);
-			   document.getElementById("shbp").value = "Hide";
 			   map.setCenter(address4);
         	  } else {
             newMarker.setVisible(false);
-            			   document.getElementById("shbp").value = "Show on map";
 
       	  }			})
 			
@@ -736,8 +728,8 @@ var address4 = new google.maps.LatLng(distence4[0][1], distence4[0][2])
        }
         function showDirection(marker,directionsService2,directionsDisplay2) {
 
-        marker.addListener('click', function() {
-          clicked = marker.getPosition();
+       marker.addListener('click', function() {
+       clicked = marker.getPosition();
        calculatefootprint(directionsService2, directionsDisplay2,clicked)
       })
        }
